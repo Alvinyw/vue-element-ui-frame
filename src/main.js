@@ -9,6 +9,10 @@ import ElementUI from 'element-ui'
 import '@/styles/theme/index.css'
 Vue.use(ElementUI)
 
+// 引入字体图标库 iconfont
+import '@/styles/iconfont/iconfont.css'
+import '@/styles/iconfont/iconfont.js'
+
 // import './utils/rem' // 适配移动端设备
 import './api' // 接口文件
 import './utils' // 工具库

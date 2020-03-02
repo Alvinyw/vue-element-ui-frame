@@ -5,6 +5,10 @@ import store from './store'
 import router from './router'
 import i18n from './lang' // 引入多语言配置文件
 
+import ElementUI from 'element-ui'
+import '@/styles/theme/index.css'
+Vue.use(ElementUI)
+
 // import './utils/rem' // 适配移动端设备
 import './api' // 接口文件
 import './utils' // 工具库

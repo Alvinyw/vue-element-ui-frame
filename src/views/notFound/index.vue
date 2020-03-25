@@ -5,7 +5,11 @@
     <p class="init-detail">您访问的页面不存在，或已被绑架了</p>
   </div>
 </template>
-
+<script>
+export default {
+  name: "NotFoundIndex"
+}
+</script>
 <style lang="scss" scoped>
 @import "@/styles/not_found.scss";
 .notFoundIndex {

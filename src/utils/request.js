@@ -1,4 +1,10 @@
 import axios from 'axios'
+// import md5 from 'js-md5';
+// import store from '../store'
+// import {
+//   getYYMMDD,
+//   getUUID
+// } from '../utils/lib'
 
 // create an axios instance
 const service = axios.create({
@@ -12,9 +18,20 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
 
+    // const devConfigInfo = {}
+    // const merchantInfo = {}
+
+    // const secret = devConfigInfo.secret ? devConfigInfo.secret : ""
+    // const merchantCode = merchantInfo.merchantId ? merchantInfo.merchantId : ""
+    // const childMerchantCode = merchantInfo.childMerchantId ? merchantInfo.childMerchantId : ""
+    // const productCode = store.getters.productCode
     // const _time = new Date().getTime()
 
+    // config.headers['code'] = merchantCode
+    // config.headers['childMerchantCode'] = childMerchantCode
     // config.headers['time'] = _time
+    // config.headers['sign'] = md5(merchantCode + secret + _time).toString()
+    // config.headers['requestNo'] = merchantCode + productCode + getYYMMDD().toString() + getUUID().toString()
     // config.headers['version'] = '1.0.0'
     return config
   },

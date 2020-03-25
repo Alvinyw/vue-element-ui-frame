@@ -1,4 +1,4 @@
-// 填入的值必须为 number
+// 比较 a、b 是否相等
 export function isObjEqual(a, b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }

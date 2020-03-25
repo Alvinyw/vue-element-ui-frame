@@ -5,7 +5,11 @@
     <p class="init-detail">很抱歉，访问页面失败，请稍后再试</p>
   </div>
 </template>
-
+<script>
+export default {
+  name: "DefaultIndex"
+}
+</script>
 <style lang="scss" scoped>
 @import "@/styles/not_found.scss";
 </style>

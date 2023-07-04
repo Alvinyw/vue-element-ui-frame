@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import pageType from "@/const/pageType"
+import pageType from "@/const/pageType";
 
 export default {
   name: "HomeIndex",
@@ -51,6 +51,18 @@ export default {
     return {
       tableData: Array(10).fill(item)
     }
+  },
+  mounted() {
+    this.$api.app.queryTemplateList({ pageId: 'a01' })
+      .then(res => {
+        this.isSubmitting = false;
+        this.ifShowDialog = false;
+        this.$emit("getMerchantInfo");
+      })
+      .catch(err => {
+        this.isSubmitting = false;
+        this.$message.error(err.message);
+      });
   },
   methods: {
     onHandleEdit(item = {}) {

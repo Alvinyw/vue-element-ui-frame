@@ -5,10 +5,10 @@ import request from '@/utils/request'
  * @param {parm1} 参数1
  * @param {parm2} 参数2
  */
-export function uploadIDcard(data) {
+export function queryTemplateList(data) {
   return request({
-    url: '/abc/bank',
-    method: 'post',
+    url: '/perPageTemplateQry',
+    method: 'get',
     data,
   })
 }

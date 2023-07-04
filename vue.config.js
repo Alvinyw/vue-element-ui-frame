@@ -15,21 +15,22 @@ module.exports = {
       warnings: false,
       errors: true,
     },
+    https: true,
     proxy: {
-      '/api': {
+      '/api/': {
         // 此处并非和url一致
-        target: 'http://192.168.135.229:8082/wallet', // 测试
+        target: 'https://10.20.170.35:8090/', // 测试
         // target: 'http://192.168.135.193:8082/wallet', // 本地
         changeOrigin: true, // 允许跨域
         ws: true,
         pathRewrite: {
-          '^/api': '',
+          '^/api/': '',
         },
       },
     },
   },
   configureWebpack: {
-    name: '哈哈',
+    name: '',
     resolve: {
       alias: {
         '@': resolve('src'),

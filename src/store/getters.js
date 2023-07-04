@@ -1,5 +1,4 @@
 const getters = {
-  // token: state => state.user.userData.token,
-  productCode: state => state.app.productCode
+  templateInfo: state => state.app.templateInfo
 }
 export default getters

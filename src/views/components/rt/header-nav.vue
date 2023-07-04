@@ -1,0 +1,56 @@
+<template>
+    <el-row class="header-com">
+        <p class="com-nm">顶部导航</p>
+        <el-collapse value="1">
+            <el-collapse-item title="样式设置" name="1">
+                <el-row class="com-wrapper">
+                    <el-form label-position="left" :model="headerNav" label-width="100px">
+                        <el-form-item label="页面标题">
+                            <el-input v-model="headerNav.title"></el-input>
+                        </el-form-item>
+                        <el-form-item label="标题颜色">
+                            <el-color-picker v-model="headerNav.fontColor" show-alpha></el-color-picker>
+                        </el-form-item>
+                        <el-form-item label="背景颜色">
+                            <el-color-picker v-model="headerNav.bgColor" show-alpha></el-color-picker>
+                        </el-form-item>
+                    </el-form>
+                </el-row>
+            </el-collapse-item>
+
+        </el-collapse>
+    </el-row>
+</template>
+<script>
+import { mapGetters } from "vuex";
+import { componentType, componentTypeMap } from "@/const/componentType";
+
+
+export default {
+    name: "HeaderNav",
+    data() {
+        return {
+        }
+    },
+    computed: {
+        ...mapGetters(["templateInfo"]),
+        headerNav() {
+            const { headerNav = {} } = this.templateInfo;
+            return headerNav;
+        },
+    },
+    watch: {
+        headerNav(val) {
+            this.$store.dispatch("app/updateTemplateInfo", { headerNav: val, pageLayout: this.pageLayout, footerNav: this.footerNav });
+        }
+    },
+    mounted() {
+
+    },
+    methods: {
+
+    }
+};
+</script>
+
+<style scoped lang="less"></style>

@@ -29,13 +29,14 @@ module.exports = {
     },
   },
   configureWebpack: {
-    name: 'vue elemtn-ui frame',
+    name: '哈哈',
     resolve: {
       alias: {
         '@': resolve('src'),
         images: '@/assets/images',
         components: '@/components',
         views: '@/views',
+        const: '@/const',
       },
     }
   },

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import layout from '@/layout'
+// import layout from '@/layout'
 
 Vue.use(Router)
 const router = new Router({
@@ -13,6 +13,12 @@ const router = new Router({
       path: '/home',
       name: 'homeIndex',
       component: () => import( /* webpackChunkName: "home" */ '@/views/home/index'),
+    },
+
+    {
+      path: '/edit',
+      name: 'editIndex',
+      component: () => import( /* webpackChunkName: "home" */ '@/views/edit/index'),
     },
 
     // 成功

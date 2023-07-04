@@ -1,46 +1,117 @@
 <template>
-  <div class="homeView">
-    <h2>element-ui 按钮样式</h2>
-    <el-row>
-      <el-button>默认按钮</el-button>
-      <el-button type="primary">主要按钮</el-button>
-      <el-button type="success">成功按钮</el-button>
-      <el-button type="info">信息按钮</el-button>
-      <el-button type="warning">警告按钮</el-button>
-      <el-button type="danger">危险按钮</el-button>
-    </el-row>
+  <el-container class="home-index" style="height: 100vh; border: 1px solid #eee">
+    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+      <el-menu :default-openeds="['1', '3']">
+        <el-submenu index="1">
+          <template slot="title"><i class="el-icon-message"></i>页面列表</template>
+          <el-menu-item index="1-1">手机银行首页</el-menu-item>
+          <el-menu-item index="1-2">个人中心页面</el-menu-item>
+        </el-submenu>
+        <el-submenu index="3">
+          <template slot="title"><i class="el-icon-setting"></i>审核中心</template>
+          <el-menu-item index="3-1">待审核列表</el-menu-item>
+        </el-submenu>
+        <el-submenu index="2">
+          <template slot="title"><i class="el-icon-menu"></i>操作记录</template>
+          <el-menu-item index="2-1">操作记录查询</el-menu-item>
+        </el-submenu>
+      </el-menu>
+    </el-aside>
 
-    <el-row>
-      <el-button v-waves plain>朴素按钮</el-button>
-      <el-button v-waves type="primary" plain>主要按钮</el-button>
-      <el-button v-waves type="success" plain>成功按钮</el-button>
-      <el-button v-waves type="info" plain>信息按钮</el-button>
-      <el-button v-waves type="warning" plain>警告按钮</el-button>
-      <el-button v-waves type="danger" plain>危险按钮</el-button>
-    </el-row>
+    <el-container>
+      <el-header style="text-align: left; font-size: 14px">
+        页面模版列表
+      </el-header>
 
-    <el-row>
-      <el-button round>圆角按钮</el-button>
-      <el-button type="primary" round>主要按钮</el-button>
-      <el-button type="success" round>成功按钮</el-button>
-      <el-button type="info" round>信息按钮</el-button>
-      <el-button type="warning" round>警告按钮</el-button>
-      <el-button type="danger" round>危险按钮</el-button>
-    </el-row>
-
-    <el-row>
-      <el-button icon="el-icon-search" circle></el-button>
-      <el-button type="primary" icon="el-icon-edit" circle></el-button>
-      <el-button type="success" icon="el-icon-check" circle></el-button>
-      <el-button type="info" icon="el-icon-message" circle></el-button>
-      <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-      <el-button type="danger" icon="el-icon-delete" circle></el-button>
-    </el-row>
-  </div>
+      <el-main class="tp-wrapper">
+        <el-row v-for="(item, index) in tableData" :key="index" class="tp">
+          <el-row class="sec-btm">
+            <p class="name">{{ item.name }}</p>
+            <p class="date">{{ item.date }}</p>
+            <p class="btn-grp"><el-link type="primary">使用</el-link><el-link type="primary"
+                @click="onHandleEdit(item)">编辑</el-link></p>
+          </el-row>
+        </el-row>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
+import pageType from "@/const/pageType"
+
 export default {
-  name: "Home"
+  name: "HomeIndex",
+  data() {
+    const item = {
+      date: '2016-05-02',
+      name: '页面模板1',
+      templateId: '32346456'
+    };
+    return {
+      tableData: Array(10).fill(item)
+    }
+  },
+  methods: {
+    onHandleEdit(item = {}) {
+      const { templateId } = item;
+      const { Home } = pageType;
+      this.$router.push({
+        name: 'editIndex',
+        query: { templateId, pageType: Home },
+      })
+    }
+  }
 };
 </script>
+
+<style scoped lang="less">
+.home-index {
+  .el-header {
+    background-color: #eee;
+    color: #333;
+    line-height: 60px;
+    box-shadow: #ccc 5px 5px 8px 6px;
+  }
+
+  .el-aside {
+    color: #333;
+  }
+
+  .tp-wrapper {
+    .tp {
+      display: inline-block;
+      position: relative;
+      margin: 15px;
+      width: 200px;
+      height: 310px;
+      border: 1px solid #ddd;
+      background-image: url("../../assets/images/tp_bg.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      .sec-btm {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        font-size: 14px;
+        width: 100%;
+
+        p {
+          padding: 0 5px;
+          line-height: 24px;
+        }
+
+        .btn-grp {
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          margin: 5px 0 0;
+          height: 30px;
+          border-top: 1px solid #ddd;
+        }
+      }
+    }
+  }
+}
+</style>

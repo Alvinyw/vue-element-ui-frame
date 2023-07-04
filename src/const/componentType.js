@@ -9,7 +9,8 @@ export const componentType = {
     RICH_TEXT: 4, // 富文本
     TITLE: 5, // 标题
     PURE_IMG: 6, // 图片
-    CAIDAN: 7, // 菜单
+    QUICK_ENTER: 7, // 快捷入口
+
     // 业务组件
     LICAI: 11, // 理财
     CUNKUAN: 12, // 存款
@@ -17,6 +18,10 @@ export const componentType = {
     // 系统组件
     SOUSUO: 20, // 搜索
     WANGDIAN: 21, // 网点
+
+    // 系统组件
+    HEADR_NAV: 30, // 顶部导航
+    FOOTER_NAV: 31, // 底部导航
 };
 
 export const componentTypeMap = [
@@ -51,9 +56,9 @@ export const componentTypeMap = [
         name: '图片',
     },
     {
-        value: componentType.CAIDAN,
+        value: componentType.QUICK_ENTER,
         icon: 'el-icon-picture',
-        name: '菜单',
+        name: '快捷入口',
     },
     {
         value: componentType.LICAI,

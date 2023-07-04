@@ -2,7 +2,8 @@
     <el-container class="edit-index">
         <el-header class="sec-hd">
             <el-row class="lt"><el-button>返回</el-button></el-row>
-            <el-row class="rt"><el-button>保存</el-button><el-button type="primary" @click="onHandleApply">应用</el-button></el-row>
+            <el-row class="rt"><el-button>保存</el-button><el-button type="primary"
+                    @click="onHandleApply">应用</el-button></el-row>
         </el-header>
         <el-main class="sec-main">
             <el-row class="lt">
@@ -13,34 +14,32 @@
                 </ul>
                 <el-row class="content-wrapper">
                     <el-row class="sucai">
-                        <el-collapse v-model="activeNames" @change="handleSuCaiChange">
+                        <el-collapse v-model="activeNames">
                             <el-collapse-item :title="SuCai[0].title" name="1">
                                 <el-row class="item-wrapper">
-                                    <template v-for="(item, index) in suCaiComInfo[0]">
-                                        <el-row :key="index" class="item">
-                                            <i :class="item.icon"></i>
-                                            <span class="nm">{{ item.name }}</span></el-row>
-                                    </template>
+                                    <div v-for="(item, index) in suCaiComInfo[0]" :key="index" class="item"
+                                        @click="onAddSuCai(item.value)">
+                                        <i :class="item.icon"></i>
+                                        <span class="nm">{{ item.name }}</span>
+                                    </div>
                                 </el-row>
                             </el-collapse-item>
                             <el-collapse-item :title="SuCai[1].title" name="2">
                                 <el-row class="item-wrapper">
-                                    <template v-for="(item, index) in suCaiComInfo[1]">
-                                        <el-row :key="index" class="item">
-                                            <i :class="item.icon"></i>
-                                            <span class="nm">{{ item.name }}</span></el-row>
-                                    </template>
-
+                                    <div v-for="(item, index) in suCaiComInfo[1]" :key="index" class="item"
+                                        @click="onAddSuCai(item.value)">
+                                        <i :class="item.icon"></i>
+                                        <span class="nm">{{ item.name }}</span>
+                                    </div>
                                 </el-row>
                             </el-collapse-item>
                             <el-collapse-item :title="SuCai[2].title" name="3">
                                 <el-row class="item-wrapper">
-                                    <template v-for="(item, index) in suCaiComInfo[2]">
-                                        <el-row :key="index" class="item">
-                                            <i :class="item.icon"></i>
-                                            <span class="nm">{{ item.name }}</span></el-row>
-                                    </template>
-
+                                    <div v-for="(item, index) in suCaiComInfo[2]" :key="index" class="item"
+                                        @click="onAddSuCai(item.value)">
+                                        <i :class="item.icon"></i>
+                                        <span class="nm">{{ item.name }}</span>
+                                    </div>
                                 </el-row>
                             </el-collapse-item>
                         </el-collapse>
@@ -49,25 +48,26 @@
             </el-row>
             <el-row class="md">
                 <el-row class="iphone-view">
-                    <el-row class="head-nav" :style="{'background-color': headerNav.bgColor}">
+                    <div class="head-nav" :style="{ 'background-color': headerNav.bgColor }"
+                        @click="onAddSuCai(componentType.HEADR_NAV)">
                         <img :src="bgHeaderNav" />
-                        <h1>{{ headerNav.title }}</h1>
-                    </el-row>
-                    <el-row class="footer-nav">
-                        <el-row v-for="(item, index) in footerNav.list" :key="index" class="item">
+                        <h1 :style="{ 'color': headerNav.fontColor }">{{ headerNav.title }}</h1>
+                    </div>
+                    <div class="footer-nav" @click="onAddSuCai(componentType.FOOTER_NAV)">
+                        <div v-for="(item, index) in footerNav.list" :key="index" class="item">
                             <img :src="item.icon" />
-                            <span class="nm">{{ item.name }}</span></el-row>
-                    </el-row>
+                            <span class="nm">{{ item.name }}</span>
+                        </div>
+                    </div>
                 </el-row>
             </el-row>
-            <el-row class="rt">
-                <el-row class=""></el-row>
-            </el-row>
+            <RightIndex />
         </el-main>
     </el-container>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import RightIndex from "./right.vue";
 import { componentType, componentTypeMap } from "@/const/componentType";
 import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
 
@@ -81,7 +81,7 @@ const SuCai = [
             componentType.TITLE,
             componentType.PURE_IMG,
             componentType.IMG,
-            componentType.CAIDAN,
+            componentType.QUICK_ENTER,
         ]
     },
     {
@@ -102,11 +102,13 @@ const SuCai = [
 ]
 export default {
     name: "EditIndex",
+    components: { RightIndex },
     data() {
         return {
             activtedIndex: '1',
             activeNames: ['1', '2', '3'],
             SuCai,
+            componentType,
             bgHeaderNav,
             suCaiComInfo: [],
         }
@@ -126,14 +128,18 @@ export default {
             return pageLayout;
         },
     },
+    watch: {
+        headerNav(val) {
+            this.$store.dispatch("app/updateTemplateInfo", { headerNav: val, pageLayout: this.pageLayout, footerNav: this.footerNav });
+        }
+    },
     mounted() {
         this.generateComInfo();
+        // console.log('=======templateInfo======', this.suCaiComInfo, this.footerNav)
     },
     methods: {
         onHandleTabClick(index = '1') {
             this.activtedIndex = index;
-        },
-        handleSuCaiChange(val) {
         },
         generateComInfo() {
             SuCai.forEach(item => {
@@ -146,6 +152,9 @@ export default {
         },
         onHandleApply() {
             this.$store.dispatch("app/updateTemplateInfo", {});
+        },
+        onAddSuCai(value = componentType.HEADR_NAV) {
+            this.$store.dispatch("app/updateCurrentComType", value);
         }
     }
 };
@@ -288,7 +297,7 @@ export default {
                     width: 100%;
                     height: 50px;
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: space-around;
                     background-color: #fff;
 
                     .item {
@@ -310,13 +319,5 @@ export default {
                 }
             }
         }
-
-        .rt {
-            width: 320px;
-            min-height: 100%;
-            background-color: #fff;
-
-        }
     }
-}
-</style>
+}</style>

@@ -1,9 +1,11 @@
 export default {
   namespaced: true,
   state: {
+    currentComType: '30', // 当前选中的组件
     templateInfo: {
       headerNav: {
-        bgColor: "",
+        bgColor: "rgba(255, 255, 255, 1)",
+        fontColor: "rgba(0, 0, 0, 1)",
         title: '页面标题'
       },
       pageLayout: [],
@@ -47,10 +49,16 @@ export default {
     UPDATE_TEMPLATE_INFO(state, status) {
       state.templateInfo = status
     },
+    UPDATE_CURRENT_COM(state, val) {
+      state.currentComType = val
+    },
   },
   actions: {
     updateTemplateInfo({ commit }, info) {
       commit('UPDATE_TEMPLATE_INFO', info)
+    },
+    updateCurrentComType({ commit }, val) {
+      commit('UPDATE_CURRENT_COM', val)
     },
   },
 }

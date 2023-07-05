@@ -53,15 +53,10 @@ export default {
     }
   },
   mounted() {
-    this.$api.app.perTemplateQry({ templateId: 'a01' })
+    this.$api.app.perPageTemplateMappingQry({pageId: 'page-1'})
       .then(res => {
-        this.isSubmitting = false;
-        this.ifShowDialog = false;
-        this.$emit("getMerchantInfo");
       })
       .catch(err => {
-        this.isSubmitting = false;
-        this.$message.error(err.message);
       });
   },
   methods: {

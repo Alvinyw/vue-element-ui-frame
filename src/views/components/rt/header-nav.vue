@@ -41,13 +41,10 @@ export default {
     },
     watch: {
         obj(oldVal, newVal) {
-            // console.log('====obj=======', newVal)
+            // console.log('====headerNav=======', oldVal, newVal)
             if (oldVal == newVal) return;
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, headerNav: newVal });
         },
-        templateInfo(val) {
-            console.log('======val33444======', val)
-        }
     },
     mounted() {
 

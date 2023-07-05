@@ -49,9 +49,10 @@
             <el-row class="md">
                 <el-row class="iphone-view">
                     <div class="head-nav" :class="currentComType == componentType.HEADR_NAV ? 'actived' : ''"
-                        :style="{ 'background-color': obj.bgColor }" @click="onAddSuCai(componentType.HEADR_NAV, false)">
+                        :style="{ 'background-color': headerNav.bgColor }"
+                        @click="onAddSuCai(componentType.HEADR_NAV, false)">
                         <img :src="bgHeaderNav" />
-                        <h1 :style="{ 'color': obj.fontColor }">{{ obj.title }}</h1>
+                        <h1 :style="{ 'color': headerNav.fontColor }">{{ headerNav.title }}</h1>
                     </div>
                     <MiddleIndex />
                     <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
@@ -122,13 +123,13 @@ export default {
             const { footerNav = {} } = this.templateInfo;
             return footerNav;
         },
-        obj() {
+        headerNav() {
             const { headerNav = {} } = this.templateInfo;
             return headerNav;
         },
     },
     watch: {
-        obj(oldVal, newVal) {
+        headerNav(oldVal, newVal) {
             // console.log('===oldVal=====', oldVal, newVal, oldVal == newVal)
             if (oldVal == newVal) return;
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, headerNav: newVal });
@@ -152,7 +153,11 @@ export default {
             })
         },
         onHandleApply() {
-            this.$store.dispatch("app/updateTemplateInfo", {});
+            this.$api.app.perPageTemplateMappingUse({ templateId: 'a01', pageId: 'page-1' })
+                .then(res => {
+                })
+                .catch(err => {
+                });
         },
         onAddSuCai(val = componentType.HEADR_NAV, update = true) {
             this.$store.dispatch("app/updateCurrentComType", val);
@@ -225,6 +230,8 @@ export default {
 
             .content-wrapper {
                 padding: 0 8px;
+                height: calc(100vh - 118px);
+                overflow: scroll;
 
                 .sucai {
                     .item-wrapper {

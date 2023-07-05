@@ -79,13 +79,13 @@ export default {
             pageLayout.forEach((item, index) => {
                 if (index == this.selectedIndex) item.property = newVal;
             });
-            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout, time: new Date().getTime() + 1000 });
+            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
         }
     },
     mounted() {
         const { property = {} } = this.options || {};
         this.obj = JSON.parse(JSON.stringify(property));
-        // console.log('======obj=========', this.obj)
+        console.log('======obj=========', this.obj)
     },
     methods: {
         handleClick() { },

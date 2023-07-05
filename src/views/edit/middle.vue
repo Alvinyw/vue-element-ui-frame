@@ -31,7 +31,7 @@ export default {
         componentAry() {
             const { pageLayout = {} } = this.templateInfo;
             const _c = mapToComponents(pageLayout);
-            // console.log('======componentAry-1=========', _c)
+            console.log('======componentAry-1=========', _c)
             return _c;
         }
     },

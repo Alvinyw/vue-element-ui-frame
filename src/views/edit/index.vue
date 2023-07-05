@@ -3,7 +3,7 @@
         <el-header class="sec-hd">
             <el-row class="lt"><el-button @click="goBack">返回</el-button></el-row>
             <el-row class="rt"><el-button @click="onHandleSave">保存</el-button><el-button type="primary"
-                    @click="onHandleApply">应用</el-button></el-row>
+                    @click="dialogTableVisible = true">应用</el-button></el-row>
         </el-header>
         <el-main class="sec-main">
             <el-row class="lt">
@@ -66,6 +66,21 @@
             </el-row>
             <RightIndex />
         </el-main>
+        <el-dialog title="选择应用系统" :visible.sync="dialogTableVisible">
+            <el-table class="dig-tb" ref="multipleTable" :data="tableData" tooltip-effect="dark">
+                <el-table-column type="selection" width="55">
+                </el-table-column>
+                <el-table-column label="应用名称" width="120">
+                    <template slot-scope="scope">{{ scope.row.name }}</template>
+                </el-table-column>
+                <el-table-column prop="guisu" label="应用归属" width="120">
+                </el-table-column>
+            </el-table>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogTableVisible = false">取 消</el-button>
+                <el-button type="primary" @click="onHandleApply">确 定</el-button>
+            </span>
+        </el-dialog>
     </el-container>
 </template>
 <script>
@@ -116,7 +131,26 @@ export default {
             bgHeaderNav,
             suCaiComInfo: [],
             templateId: new Date().getTime().toString(),
+            dialogTableVisible: false,
+            tableData: [{
+                Id: 'per',
+                name: '个人手机银行',
+                guisu: '渠道团队'
+            }, {
+                Id: 'ent',
+                name: '企业手机银行',
+                guisu: '渠道团队'
+            }, {
+                Id: 'wangdai',
+                name: '赣银快贷小程序',
+                guisu: '新网贷'
+            }, {
+                Id: 'xindai',
+                name: '信贷小程序',
+                guisu: '新网贷'
+            }]
         }
+
     },
     computed: {
         ...mapGetters(["templateInfo", "currentComType"]),
@@ -138,14 +172,18 @@ export default {
     },
     mounted() {
         this.generateComInfo();
-        // console.log('=======templateInfo======', this.suCaiComInfo, this.footerNav)
+        // console.log('=======router======', this.$router.currentRoute.query)
     },
     methods: {
         goBack() {
-            console.log('====this.$router=====', this.$router);
             this.$router.go(-1);
         },
         updateTemplateId() {
+            const { templateId = '' } = this.$router.currentRoute.query;
+            if (templateId) {
+                this.templateId = templateId;
+                return;
+            }
             this.templateId = new Date().getTime().toString();
         },
         onHandleTabClick(index = '1') {
@@ -163,6 +201,23 @@ export default {
         async onHandleSave() {
             const { title = '首页' } = this.headerNav;
             this.updateTemplateId();
+            const { templateId = '' } = this.$router.currentRoute.query;
+            if (templateId) {
+                this.$api.app.perTemplateUpd({ templateId: this.templateId, templateName: title, templateContext: JSON.stringify(this.templateInfo) })
+                    .then(() => {
+                        this.$message({
+                            message: '模版更新成功！',
+                            type: 'success'
+                        });
+                    })
+                    .catch(() => {
+                        this.$message({
+                            message: '模版更新失败！',
+                            type: 'error'
+                        });
+                    });
+                return;
+            }
             this.$api.app.perTemplateAdd({ templateId: this.templateId, templateName: title, templateContext: JSON.stringify(this.templateInfo) })
                 .then(() => {
                     this.$message({
@@ -191,6 +246,8 @@ export default {
                         message: '模版应用失败！',
                         type: 'error'
                     });
+                }).finally(() => {
+                    this.dialogTableVisible = false;
                 });
         },
         onAddSuCai(val = componentType.HEADR_NAV, update = true) {
@@ -214,8 +271,23 @@ export default {
 };
 </script>
 
+<style lang="less">
+.edit-index {
+    .dig-tb {
+        table {
+            width: 100% !important;
+        }
+    }
+}
+</style>
 <style scoped lang="less">
 .edit-index {
+    .dig-tb {
+        table {
+            width: 100% !important;
+        }
+    }
+
     .sec-hd {
         height: 59px;
         width: 100%;

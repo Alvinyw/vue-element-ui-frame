@@ -2,6 +2,7 @@ export default {
   namespaced: true,
   state: {
     currentComType: '30', // 当前选中的组件
+    selectedIndex: '0', // 当前选中的组件 index
     templateInfo: {
       headerNav: {
         bgColor: "rgba(255, 255, 255, 1)",
@@ -55,6 +56,10 @@ export default {
       state.currentComType = val
       console.log('=========currentComType=========', val);
     },
+    UPDATE_SELECTED_INDEX(state, val) {
+      state.selectedIndex = val
+      console.log('=========selectedIndex=========', val);
+    },
   },
   actions: {
     updateTemplateInfo({ commit }, info) {
@@ -62,6 +67,9 @@ export default {
     },
     updateCurrentComType({ commit }, val) {
       commit('UPDATE_CURRENT_COM', val)
+    },
+    updateSelectedIndex({ commit }, idx) {
+      commit('UPDATE_SELECTED_INDEX', idx)
     },
   },
 }

@@ -159,6 +159,7 @@ export default {
             pageLayout.push(_obj);
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
             this.$store.dispatch("app/updateCurrentComType", value);
+            this.$store.dispatch("app/updateSelectedIndex", pageLayout.length - 1);
         }
     }
 };

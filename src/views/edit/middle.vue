@@ -1,8 +1,12 @@
 <template>
     <el-row class="md-main">
         <template v-for="(item, index) in componentAry">
-            <component :is="item.component" :options="item.options" :key="index">
-            </component>
+            <div @click="onComponentChange(item, index)" :key="index"
+                :class="Number(selectedIndex) == Number(index) ? 'actived' : ''" class="com-item">
+                <component :is="item.component" :options="item.options">
+                </component>
+                <span class="del" @click.stop="onComponentDel(index)"><i class="el-icon-delete"></i></span>
+            </div>
         </template>
     </el-row>
 </template>
@@ -19,7 +23,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["templateInfo", "currentComType"]),
+        ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
         pageLayout() {
             const { pageLayout = {} } = this.templateInfo;
             return pageLayout;
@@ -36,31 +40,56 @@ export default {
         }
     },
     mounted() {
-        
+
     },
     methods: {
-
+        onComponentChange(item = {}, index = 0) {
+            const { value } = item.options || {}
+            this.$store.dispatch("app/updateCurrentComType", value);
+            this.$store.dispatch("app/updateSelectedIndex", index);
+        },
+        onComponentDel(idx = 1) {
+            const { pageLayout = {} } = this.templateInfo;
+            const _p = pageLayout.filter((item, index) => item && index !== idx);
+            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout: _p });
+            this.$store.dispatch("app/updateSelectedIndex", idx - 1);
+        }
     }
 };
 </script>
 
-<style lang="less">
-.rt {
-
-    .com-nm {
-        margin: 0 0 16px 0;
-        font-size: 16px;
-        font-weight: 500;
-    }
-
-}
-</style>
 <style scoped lang="less">
-.rt {
-    width: 320px;
-    min-height: 100%;
-    padding: 15px 8px;
-    background-color: #fff;
+.md-main {
+    .com-item {
+        position: relative;
+        cursor: pointer;
+        border: 2px solid transparent;
 
+        &.actived {
+            border: 2px solid #7545F3
+        }
+
+        .del {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            font-size: 16px;
+            background-color: #7545F3;
+            color: #fff;
+            display: none;
+        }
+
+        &.actived {
+            .del {
+                display: block;
+            }
+        }
+    }
 }
 </style>

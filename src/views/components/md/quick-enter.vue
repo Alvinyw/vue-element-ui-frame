@@ -1,6 +1,5 @@
 <template>
-    <div class="quick-enter" :class="Number(currentComType) == componentType.QUICK_ENTER ? 'actived' : ''"
-        @click="onChangeComType">
+    <div class="quick-enter">
         <div class="item">
             <img v-if="iconSrc" :src="iconSrc" />
             <i v-else class="el-icon-s-home"></i>
@@ -15,6 +14,16 @@ import { componentType, componentTypeMap } from "@/const/componentType";
 
 export default {
     name: "QuickEnter",
+    props: {
+        options: {
+            type: Object,
+            required: false,
+            default: () => ({
+                property: {},
+                value: ''
+            }),
+        },
+    },
     data() {
         return {
             iconSrc: '',
@@ -39,9 +48,7 @@ export default {
 
     },
     methods: {
-        onChangeComType() {
-            this.$store.dispatch("app/updateCurrentComType", componentType.QUICK_ENTER);
-        }
+        
     }
 };
 </script>
@@ -51,13 +58,6 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    cursor: pointer;
-    border: 2px solid transparent;
-
-    &.actived {
-        border: 2px solid #7545F3
-    }
-
 
     .item {
         text-align: center;
@@ -73,4 +73,5 @@ export default {
             font-size: 14px;
         }
     }
-}</style>
+}
+</style>

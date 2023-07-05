@@ -86,3 +86,80 @@ export const componentTypeMap = [
         name: '网点',
     },
 ];
+
+export const componentProperty = [
+    {
+        value: componentType.IMG,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.TEXT_NAV,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.PURE_TEXT,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.RICH_TEXT,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.TITLE,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.PURE_IMG,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.QUICK_ENTER,
+        property: {
+            icon: [],
+            text: '',
+            link: '',
+        },
+    },
+    {
+        value: componentType.LICAI,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.CUNKUAN,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.DAIKUAN,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.SOUSUO,
+        property: {
+            color: '',
+        },
+    },
+    {
+        value: componentType.WANGDIAN,
+        property: {
+            color: '',
+        },
+    },
+]

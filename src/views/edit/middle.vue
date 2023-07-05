@@ -3,7 +3,6 @@
         <template v-for="(item, index) in componentAry">
             <component :is="item.component" :options="item.options" :key="index">
             </component>
-
         </template>
     </el-row>
 </template>
@@ -26,7 +25,10 @@ export default {
             return pageLayout;
         },
         componentAry() {
-            return mapToComponents(this.pageLayout);
+            const { pageLayout = {} } = this.templateInfo;
+            const _c = mapToComponents(pageLayout);
+            // console.log('======componentAry=========', _c)
+            return _c;
         }
     },
     watch: {
@@ -34,7 +36,7 @@ export default {
         }
     },
     mounted() {
-        console.log('======componentAry=========', this.componentAry)
+        
     },
     methods: {
 

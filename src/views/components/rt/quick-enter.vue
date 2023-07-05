@@ -4,19 +4,20 @@
         <el-collapse value="1">
             <el-collapse-item title="样式设置" name="1">
                 <el-row class="com-wrapper">
-                    <el-form label-position="left" :model="headerNav" label-width="100px">
+                    <el-form label-position="left" :model="obj" label-width="100px">
                         <el-form-item label="图标">
-                            <el-upload class="upload-demo" action="#" :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove"
-                                :file-list="fileList" list-type="picture">
+                            <el-upload class="upload-demo" action="#" :auto-upload="false" :limit="1"
+                                :on-preview="handlePreview" :on-remove="handleRemove" :file-list="obj.icon"
+                                list-type="picture">
                                 <el-button size="small" type="primary">添加图标</el-button>
                                 <div slot="tip" class="el-upload__tip"></div>
                             </el-upload>
                         </el-form-item>
                         <el-form-item label="文本">
-                            <el-input v-model="headerNav.title"></el-input>
+                            <el-input v-model="obj.text"></el-input>
                         </el-form-item>
                         <el-form-item label="链接">
-                            <el-select v-model="value" clearable placeholder="跳转链接">
+                            <el-select v-model="obj.link" clearable placeholder="跳转链接">
                                 <el-option v-for="item in options" :key="item.value" :label="item.label"
                                     :value="item.value">
                                 </el-option>
@@ -31,7 +32,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { componentType, componentTypeMap } from "@/const/componentType";
+import { componentType, componentTypeMap, componentProperty } from "@/const/componentType";
 
 
 export default {
@@ -51,35 +52,34 @@ export default {
                 value: '4',
                 label: '活动中心'
             }],
-            value: '',
-            fileList: [{ name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }, { name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }],
-            // 图片上传
-            dialogImageUrl: '',
-            dialogVisible: false,
-            disabled: false
         }
     },
     computed: {
-        ...mapGetters(["templateInfo"]),
-        headerNav() {
-            const { headerNav = {} } = this.templateInfo;
-            return headerNav;
+        ...mapGetters(["templateInfo", "currentComType"]),
+        pageLayout() {
+            const { pageLayout = {} } = this.templateInfo;
+            return pageLayout;
         },
+        obj() {
+            const _obj = componentProperty.filter(item => item.value == componentType.QUICK_ENTER)[0] || {};
+            return _obj.property;
+        }
     },
     watch: {
-
+        obj(val) {
+            // console.log('=====val=======', val)
+        }
     },
     mounted() {
-
+        // console.log('======obj=========', this.obj)
     },
     methods: {
         handleClick() { },
         handleRemove(file, fileList) {
-            console.log(file, fileList);
+
         },
         handlePreview(file) {
-            console.log(file);
-        }
+        },
     }
 };
 </script>

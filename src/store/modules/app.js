@@ -9,11 +9,6 @@ export default {
         title: '页面标题'
       },
       pageLayout: [
-        {
-          type: 7,
-          name: "富文本",
-          property: ''
-        }
       ],
       footerNav: {
         list: [

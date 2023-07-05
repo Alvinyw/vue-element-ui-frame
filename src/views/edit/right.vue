@@ -34,7 +34,7 @@ export default {
     },
     watch: {
         currentComType(val) {
-            console.log('======currentComType=========', val)
+            // console.log('======currentComType=========', val)
             switch (Number(val)) {
                 case componentType.QUICK_ENTER:
                     this.currentCom = QuickEnter;

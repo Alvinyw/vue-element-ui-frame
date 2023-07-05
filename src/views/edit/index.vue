@@ -48,10 +48,10 @@
             </el-row>
             <el-row class="md">
                 <el-row class="iphone-view">
-                    <div class="head-nav" :style="{ 'background-color': headerNav.bgColor }"
+                    <div class="head-nav" :style="{ 'background-color': obj.bgColor }"
                         @click="onAddSuCai(componentType.HEADR_NAV)">
                         <img :src="bgHeaderNav" />
-                        <h1 :style="{ 'color': headerNav.fontColor }">{{ headerNav.title }}</h1>
+                        <h1 :style="{ 'color': obj.fontColor }">{{ obj.title }}</h1>
                     </div>
                     <MiddleIndex />
                     <div class="footer-nav" @click="onAddSuCai(componentType.FOOTER_NAV)">
@@ -70,7 +70,7 @@
 import { mapGetters } from "vuex";
 import MiddleIndex from "./middle.vue";
 import RightIndex from "./right.vue";
-import { componentType, componentTypeMap } from "@/const/componentType";
+import { componentType, componentTypeMap, componentProperty } from "@/const/componentType";
 import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
 
 const SuCai = [
@@ -121,18 +121,16 @@ export default {
             const { footerNav = {} } = this.templateInfo;
             return footerNav;
         },
-        headerNav() {
+        obj() {
             const { headerNav = {} } = this.templateInfo;
             return headerNav;
         },
-        pageLayout() {
-            const { pageLayout = {} } = this.templateInfo;
-            return pageLayout;
-        },
     },
     watch: {
-        headerNav(val) {
-            this.$store.dispatch("app/updateTemplateInfo", { headerNav: val, pageLayout: this.pageLayout, footerNav: this.footerNav });
+        obj(oldVal, newVal) {
+            // console.log('===oldVal=====', oldVal, newVal, oldVal == newVal)
+            if (oldVal == newVal) return;
+            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, headerNav: newVal });
         }
     },
     mounted() {
@@ -156,6 +154,10 @@ export default {
             this.$store.dispatch("app/updateTemplateInfo", {});
         },
         onAddSuCai(value = componentType.HEADR_NAV) {
+            const { pageLayout = [] } = this.templateInfo;
+            const _obj = componentProperty.filter(item => item.value == value)[0] || {}; 
+            pageLayout.push(_obj);
+            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
             this.$store.dispatch("app/updateCurrentComType", value);
         }
     }

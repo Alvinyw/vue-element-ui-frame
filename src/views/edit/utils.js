@@ -8,6 +8,6 @@ export const componentBaseMap = {
 
 export function mapToComponents(list = []) {
     return list.map(item => {
-        return { options: item, component: componentBaseMap[item.type] };
+        return { options: item, component: componentBaseMap[item.value] };
     });
 }

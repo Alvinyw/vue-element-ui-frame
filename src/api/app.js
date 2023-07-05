@@ -27,7 +27,7 @@ export function perTemplateQry(data) {
  * 模版新增
  * @param { templateId } 参数1
  * @param { templateName } 参数1
- * @param { templateContent } 参数1
+ * @param { templateContext } 参数1
  */
  export function perTemplateAdd(data) {
   return request({
@@ -53,7 +53,7 @@ export function perTemplateQry(data) {
  * 模版更新
  * @param { templateId } 参数1
  * @param { templateName } 参数1
- * @param { templateContent } 参数1
+ * @param { templateContext } 参数1
  */
  export function perTemplateUpd(data) {
   return request({

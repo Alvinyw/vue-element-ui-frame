@@ -24,10 +24,11 @@
       </el-header>
 
       <el-main class="tp-wrapper">
+        <div class="tp-add" @click="onAdd"><i class="el-icon-plus"></i></div>
         <el-row v-for="(item, index) in tableData" :key="index" class="tp">
           <el-row class="sec-btm">
-            <p class="name">{{ item.name }}</p>
-            <p class="date">{{ item.date }}</p>
+            <p class="name">{{ item.templateName }}</p>
+            <p class="date">{{ radomTime() }}</p>
             <p class="btn-grp"><el-link type="primary">使用</el-link><el-link type="primary"
                 @click="onHandleEdit(item)">编辑</el-link></p>
           </el-row>
@@ -49,23 +50,35 @@ export default {
       templateId: '32346456'
     };
     return {
-      tableData: Array(10).fill(item)
+      tableData: []
     }
   },
   mounted() {
-    this.$api.app.perPageTemplateMappingQry({pageId: 'page-1'})
+    this.$api.app.perTemplateQryAll()
       .then(res => {
+        const { list = [] } = res.data || {};
+        this.tableData = list;
       })
-      .catch(err => {
+      .catch(() => {
       });
   },
   methods: {
-    onHandleEdit(item = {}) {
-      const { templateId } = item;
-      const { Home } = pageType;
+    radomTime() {
+      return `2023-0${Math.ceil(Math.random() * 10)}-0${Math.ceil(Math.random() * 10)}`;
+    },
+    onAdd() {
+      const { PER_HOME } = pageType;
       this.$router.push({
         name: 'editIndex',
-        query: { templateId, pageType: Home },
+        query: { pageType: PER_HOME },
+      })
+    },
+    onHandleEdit(item = {}) {
+      const { templateId } = item;
+      const { PER_HOME } = pageType;
+      this.$router.push({
+        name: 'editIndex',
+        query: { templateId, pageType: PER_HOME },
       })
     }
   }
@@ -86,6 +99,30 @@ export default {
   }
 
   .tp-wrapper {
+    .tp-add {
+      display: inline-block;
+      position: relative;
+      margin: 15px;
+      width: 200px;
+      height: 310px;
+      border: 1px solid #ddd;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        border-color: #409eff;
+        color: #409eff;
+      }
+
+      i {
+        position: absolute;
+        top: 50%;
+        margin: -20px 0 0 -15px;
+        font-size: 40px;
+        font-weight: bold;
+      }
+    }
+
     .tp {
       display: inline-block;
       position: relative;

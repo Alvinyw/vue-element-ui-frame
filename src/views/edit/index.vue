@@ -1,8 +1,8 @@
 <template>
     <el-container class="edit-index">
         <el-header class="sec-hd">
-            <el-row class="lt"><el-button>返回</el-button></el-row>
-            <el-row class="rt"><el-button>保存</el-button><el-button type="primary"
+            <el-row class="lt"><el-button @click="goBack">返回</el-button></el-row>
+            <el-row class="rt"><el-button @click="onHandleSave">保存</el-button><el-button type="primary"
                     @click="onHandleApply">应用</el-button></el-row>
         </el-header>
         <el-main class="sec-main">
@@ -115,6 +115,7 @@ export default {
             componentType,
             bgHeaderNav,
             suCaiComInfo: [],
+            templateId: new Date().getTime().toString(),
         }
     },
     computed: {
@@ -140,6 +141,13 @@ export default {
         // console.log('=======templateInfo======', this.suCaiComInfo, this.footerNav)
     },
     methods: {
+        goBack() {
+            console.log('====this.$router=====', this.$router);
+            this.$router.go(-1);
+        },
+        updateTemplateId() {
+            this.templateId = new Date().getTime().toString();
+        },
         onHandleTabClick(index = '1') {
             this.activtedIndex = index;
         },
@@ -152,11 +160,37 @@ export default {
                 this.suCaiComInfo.push(_t)
             })
         },
-        onHandleApply() {
-            this.$api.app.perPageTemplateMappingUse({ templateId: 'a01', pageId: 'page-1' })
-                .then(res => {
+        async onHandleSave() {
+            const { title = '首页' } = this.headerNav;
+            this.updateTemplateId();
+            this.$api.app.perTemplateAdd({ templateId: this.templateId, templateName: title, templateContext: JSON.stringify(this.templateInfo) })
+                .then(() => {
+                    this.$message({
+                        message: '模版保存成功！',
+                        type: 'success'
+                    });
                 })
-                .catch(err => {
+                .catch(() => {
+                    this.$message({
+                        message: '模版保存失败！',
+                        type: 'error'
+                    });
+                });
+        },
+        async onHandleApply() {
+            await this.onHandleSave();
+            this.$api.app.perPageTemplateMappingUse({ templateId: this.templateId, pageId: 'PER_HOME' })
+                .then(() => {
+                    this.$message({
+                        message: '模版应用成功！',
+                        type: 'success'
+                    });
+                })
+                .catch(() => {
+                    this.$message({
+                        message: '模版应用失败！',
+                        type: 'error'
+                    });
                 });
         },
         onAddSuCai(val = componentType.HEADR_NAV, update = true) {

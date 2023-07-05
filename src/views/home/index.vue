@@ -29,12 +29,27 @@
           <el-row class="sec-btm">
             <p class="name">{{ item.templateName }}</p>
             <p class="date">{{ radomTime() }}</p>
-            <p class="btn-grp"><el-link type="primary">使用</el-link><el-link type="primary"
+            <p class="btn-grp"><el-link type="primary" @click="onHandShiyong(item)">使用</el-link><el-link type="primary"
                 @click="onHandleEdit(item)">编辑</el-link></p>
           </el-row>
         </el-row>
       </el-main>
     </el-container>
+    <el-dialog title="选择应用系统" :visible.sync="dialogTableVisible">
+      <el-table class="dig-tb" ref="multipleTable" :data="appList" tooltip-effect="dark">
+        <el-table-column type="selection" width="55">
+        </el-table-column>
+        <el-table-column label="应用名称" width="120">
+          <template slot-scope="scope">{{ scope.row.name }}</template>
+        </el-table-column>
+        <el-table-column prop="guisu" label="应用归属" width="120">
+        </el-table-column>
+      </el-table>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogTableVisible = false">取 消</el-button>
+        <el-button type="primary" @click="onHandleApply">确 定</el-button>
+      </span>
+    </el-dialog>
   </el-container>
 </template>
 
@@ -44,13 +59,27 @@ import pageType from "@/const/pageType";
 export default {
   name: "HomeIndex",
   data() {
-    const item = {
-      date: '2016-05-02',
-      name: '页面模板1',
-      templateId: '32346456'
-    };
     return {
-      tableData: []
+      tableData: [],
+      dialogTableVisible: false,
+      selectedTmpId: '',
+      appList: [{
+        Id: 'per',
+        name: '个人手机银行',
+        guisu: '渠道团队'
+      }, {
+        Id: 'ent',
+        name: '企业手机银行',
+        guisu: '渠道团队'
+      }, {
+        Id: 'wangdai',
+        name: '赣银快贷小程序',
+        guisu: '新网贷'
+      }, {
+        Id: 'xindai',
+        name: '信贷小程序',
+        guisu: '新网贷'
+      }]
     }
   },
   mounted() {
@@ -64,7 +93,7 @@ export default {
   },
   methods: {
     radomTime() {
-      return `2023-0${Math.ceil(Math.random() * 10)}-0${Math.ceil(Math.random() * 10)}`;
+      return `2023-0${Math.ceil(Math.random() * 9)}-0${Math.ceil(Math.random() * 9)}`;
     },
     onAdd() {
       const { PER_HOME } = pageType;
@@ -72,6 +101,28 @@ export default {
         name: 'editIndex',
         query: { pageType: PER_HOME },
       })
+    },
+    onHandShiyong(item = {}) {
+      const { templateId = '' } = item;
+      this.selectedTmpId = templateId;
+      this.dialogTableVisible = true;
+    },
+    async onHandleApply() {
+      this.$api.app.perPageTemplateMappingUse({ templateId: this.selectedTmpId, pageId: 'PER_HOME' })
+        .then(() => {
+          this.$message({
+            message: '模版应用成功！',
+            type: 'success'
+          });
+        })
+        .catch(() => {
+          this.$message({
+            message: '模版应用失败！',
+            type: 'error'
+          });
+        }).finally(() => {
+          this.dialogTableVisible = false;
+        });
     },
     onHandleEdit(item = {}) {
       const { templateId } = item;
@@ -85,6 +136,15 @@ export default {
 };
 </script>
 
+<style lang="less">
+.home-index {
+    .dig-tb {
+        table {
+            width: 100% !important;
+        }
+    }
+}
+</style>
 <style scoped lang="less">
 .home-index {
   .el-header {

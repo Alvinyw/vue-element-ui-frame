@@ -67,7 +67,7 @@
             <RightIndex />
         </el-main>
         <el-dialog title="选择应用系统" :visible.sync="dialogTableVisible">
-            <el-table class="dig-tb" ref="multipleTable" :data="tableData" tooltip-effect="dark">
+            <el-table class="dig-tb" ref="multipleTable" :data="appList" tooltip-effect="dark">
                 <el-table-column type="selection" width="55">
                 </el-table-column>
                 <el-table-column label="应用名称" width="120">
@@ -132,7 +132,7 @@ export default {
             suCaiComInfo: [],
             templateId: new Date().getTime().toString(),
             dialogTableVisible: false,
-            tableData: [{
+            appList: [{
                 Id: 'per',
                 name: '个人手机银行',
                 guisu: '渠道团队'

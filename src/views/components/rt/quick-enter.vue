@@ -69,7 +69,7 @@ export default {
             pageLayout.forEach((item, index) => {
                 if (index == this.selectedIndex) item.property = newVal;
             });
-            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
+            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout, time: new Date().getTime() + 1000 });
         }
     },
     mounted() {

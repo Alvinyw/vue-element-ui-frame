@@ -53,7 +53,7 @@ export default {
     }
   },
   mounted() {
-    this.$api.app.queryTemplateList({ pageId: 'a01' })
+    this.$api.app.perPageTemplateQry({ pageId: 'a01' })
       .then(res => {
         this.isSubmitting = false;
         this.ifShowDialog = false;

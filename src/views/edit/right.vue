@@ -6,6 +6,7 @@
 <script>
 import { mapGetters } from "vuex";
 import HeaderNav from "../components/rt/header-nav.vue";
+import FooterNav from "../components/rt/footer-nav.vue";
 import QuickEnter from "../components/rt/quick-enter.vue";
 import { componentType, componentTypeMap } from "@/const/componentType";
 
@@ -32,7 +33,9 @@ export default {
                 case componentType.QUICK_ENTER:
                     this.currentCom = QuickEnter;
                     break;
-
+                case componentType.FOOTER_NAV:
+                    this.currentCom = FooterNav;
+                    break;
                 default:
                     this.currentCom = HeaderNav;
                     break;
@@ -62,9 +65,10 @@ export default {
 <style scoped lang="less">
 .rt {
     width: 320px;
-    min-height: 100%;
     padding: 15px 8px;
     background-color: #fff;
+    height: calc(100vh - 60px);
+    overflow: scroll;
 
 }
 </style>

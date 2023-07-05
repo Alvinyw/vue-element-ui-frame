@@ -58,8 +58,8 @@
                     <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
                         @click="onAddSuCai(componentType.FOOTER_NAV, false)">
                         <div v-for="(item, index) in footerNav.list" :key="index" class="item">
-                            <img :src="item.icon" />
-                            <span class="nm">{{ item.name }}</span>
+                            <img :src="item.icon[0]" />
+                            <span class="nm">{{ item.text }}</span>
                         </div>
                     </div>
                 </el-row>

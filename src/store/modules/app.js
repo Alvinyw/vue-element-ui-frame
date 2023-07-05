@@ -8,7 +8,13 @@ export default {
         fontColor: "rgba(0, 0, 0, 1)",
         title: '页面标题'
       },
-      pageLayout: [],
+      pageLayout: [
+        {
+          type: 7,
+          name: "富文本",
+          property: ''
+        }
+      ],
       footerNav: {
         list: [
           {
@@ -48,9 +54,11 @@ export default {
   mutations: {
     UPDATE_TEMPLATE_INFO(state, status) {
       state.templateInfo = status
+      console.log('=========templateInfo=========', status);
     },
     UPDATE_CURRENT_COM(state, val) {
       state.currentComType = val
+      console.log('=========currentComType=========', val);
     },
   },
   actions: {

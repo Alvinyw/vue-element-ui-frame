@@ -15,11 +15,11 @@ module.exports = {
       warnings: false,
       errors: true,
     },
-    https: true,
+    // https: true,
     proxy: {
       '/api/': {
         // 此处并非和url一致
-        target: 'https://10.20.170.35:8090/', // 测试
+        target: 'http://115.150.104.8:8091/pweb', // 测试
         // target: 'http://192.168.135.193:8082/wallet', // 本地
         changeOrigin: true, // 允许跨域
         ws: true,

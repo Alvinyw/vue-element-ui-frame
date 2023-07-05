@@ -53,6 +53,7 @@
                         <img :src="bgHeaderNav" />
                         <h1 :style="{ 'color': headerNav.fontColor }">{{ headerNav.title }}</h1>
                     </div>
+                    <MiddleIndex />
                     <div class="footer-nav" @click="onAddSuCai(componentType.FOOTER_NAV)">
                         <div v-for="(item, index) in footerNav.list" :key="index" class="item">
                             <img :src="item.icon" />
@@ -67,6 +68,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import MiddleIndex from "./middle.vue";
 import RightIndex from "./right.vue";
 import { componentType, componentTypeMap } from "@/const/componentType";
 import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
@@ -102,7 +104,7 @@ const SuCai = [
 ]
 export default {
     name: "EditIndex",
-    components: { RightIndex },
+    components: { MiddleIndex, RightIndex },
     data() {
         return {
             activtedIndex: '1',

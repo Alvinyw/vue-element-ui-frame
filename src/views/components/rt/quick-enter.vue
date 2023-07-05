@@ -6,40 +6,21 @@
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="headerNav" label-width="100px">
                         <el-form-item label="图标">
-                            <el-upload action="#" list-type="picture-card" :auto-upload="false">
-                                <i slot="default" class="el-icon-plus"></i>
-                                <div slot="file" slot-scope="{file}">
-                                    <img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
-                                    <span class="el-upload-list__item-actions">
-                                        <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
-                                            <i class="el-icon-zoom-in"></i>
-                                        </span>
-                                        <span v-if="!disabled" class="el-upload-list__item-delete"
-                                            @click="handleDownload(file)">
-                                            <i class="el-icon-download"></i>
-                                        </span>
-                                        <span v-if="!disabled" class="el-upload-list__item-delete"
-                                            @click="handleRemove(file)">
-                                            <i class="el-icon-delete"></i>
-                                        </span>
-                                    </span>
-                                </div>
+                            <el-upload class="upload-demo" action="#" :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove"
+                                :file-list="fileList" list-type="picture">
+                                <el-button size="small" type="primary">添加图标</el-button>
+                                <div slot="tip" class="el-upload__tip"></div>
                             </el-upload>
                         </el-form-item>
                         <el-form-item label="文本">
                             <el-input v-model="headerNav.title"></el-input>
                         </el-form-item>
                         <el-form-item label="链接">
-                            <el-dropdown @click="handleClick">
-                                <span class="el-dropdown-link">
-                                    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
-                                </span>
-                                <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item>黄金糕</el-dropdown-item>
-                                    <el-dropdown-item>狮子头</el-dropdown-item>
-                                    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                                </el-dropdown-menu>
-                            </el-dropdown>
+                            <el-select v-model="value" clearable placeholder="跳转链接">
+                                <el-option v-for="item in options" :key="item.value" :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-form>
                 </el-row>
@@ -57,6 +38,21 @@ export default {
     name: "QuickEnter",
     data() {
         return {
+            options: [{
+                value: '1',
+                label: '首页'
+            }, {
+                value: '2',
+                label: '个人中心'
+            }, {
+                value: '3',
+                label: '积分中心'
+            }, {
+                value: '4',
+                label: '活动中心'
+            }],
+            value: '',
+            fileList: [{ name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }, { name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }],
             // 图片上传
             dialogImageUrl: '',
             dialogVisible: false,
@@ -78,18 +74,33 @@ export default {
     },
     methods: {
         handleClick() { },
-        handleRemove(file) {
-            console.log(file);
+        handleRemove(file, fileList) {
+            console.log(file, fileList);
         },
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
-        },
-        handleDownload(file) {
+        handlePreview(file) {
             console.log(file);
         }
     }
 };
 </script>
 
-<style scoped lang="less"></style>
+<style lang="less">
+.quick-enter {
+    .com-wrapper {
+        .up-img {
+            // .el-upload {
+            //     width: 50px;
+            //     height: 50px;
+            //     line-height: 58px;
+            // }
+
+            // .el-upload-list {
+            //     .el-upload-list__item {
+            //         height: 100px;
+            //         width: 100px;
+            //     }
+            // }
+        }
+    }
+}
+</style>

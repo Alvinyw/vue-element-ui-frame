@@ -7,8 +7,8 @@ import request from '@/utils/request'
  */
 export function queryTemplateList(data) {
   return request({
-    url: '/perPageTemplateQry',
-    method: 'get',
+    url: '/perPageTemplateQry.do',
+    method: 'post',
     data,
   })
 }

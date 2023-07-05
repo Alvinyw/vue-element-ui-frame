@@ -1,6 +1,6 @@
 <template>
   <el-container class="home-index" style="height: 100vh; border: 1px solid #eee">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-aside width="200px">
       <el-menu :default-openeds="['1', '3']">
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-message"></i>页面列表</template>
@@ -148,14 +148,20 @@ export default {
 <style scoped lang="less">
 .home-index {
   .el-header {
-    background-color: #eee;
+    background-color: #fdfdfd;
     color: #333;
     line-height: 60px;
-    box-shadow: #ccc 5px 5px 8px 6px;
+    border-bottom: 1px solid #ddd;
+    box-shadow: #eee 5px 5px 8px 6px;
   }
 
   .el-aside {
     color: #333;
+    background-color: #fff;
+    border-right: solid 1px #e6e6e6;
+    .el-menu {
+      border: none;
+    }
   }
 
   .tp-wrapper {

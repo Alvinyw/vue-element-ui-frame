@@ -5,11 +5,10 @@
             <el-collapse-item title="样式设置" name="1">
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
-                        <div class="sec" v-for="(item, index) in obj.list" :key="index">
+                        <div class="sec" v-for="(item, index) in obj.property.list" :key="index">
                             <el-form-item label="图标">
                                 <el-upload class="upload-demo" action="#" :auto-upload="false" :limit="1"
-                                    :on-preview="handlePreview" :on-remove="handleRemove" :file-list="item.icon"
-                                    list-type="picture">
+                                    :file-list="item.icon" list-type="picture">
                                     <el-button size="small" type="primary">添加图标</el-button>
                                     <div slot="tip" class="el-upload__tip"></div>
                                 </el-upload>
@@ -46,13 +45,13 @@ export default {
                 label: '首页'
             }, {
                 value: '2',
-                label: '预约'
+                label: '个人中心'
             }, {
                 value: '3',
-                label: '服务'
+                label: '积分中心'
             }, {
                 value: '4',
-                label: '我的'
+                label: '活动中心'
             }],
         }
     },

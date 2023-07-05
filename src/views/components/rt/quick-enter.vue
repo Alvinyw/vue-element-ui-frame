@@ -6,8 +6,7 @@
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
                         <el-form-item label="图标">
-                            <el-upload class="upload-demo" action="#" :auto-upload="false" :limit="1"
-                                :on-preview="handlePreview" :on-remove="handleRemove" :file-list="obj.icon"
+                            <el-upload class="upload-demo" action="#" :on-change="handleChange" :auto-upload="false" :limit="1" :file-list="obj.icon"
                                 list-type="picture">
                                 <el-button size="small" type="primary">添加图标</el-button>
                                 <div slot="tip" class="el-upload__tip"></div>
@@ -88,32 +87,12 @@ export default {
         console.log('======obj=========', this.obj)
     },
     methods: {
-        handleClick() { },
-        handleRemove(file, fileList) {
-        },
-        handlePreview(file) {
-        },
+        handleChange(file, fileList) {
+            console.log('======file, fileList======', file, fileList)
+        }
     }
 };
 </script>
 
 <style lang="less">
-.quick-enter {
-    .com-wrapper {
-        .up-img {
-            // .el-upload {
-            //     width: 50px;
-            //     height: 50px;
-            //     line-height: 58px;
-            // }
-
-            // .el-upload-list {
-            //     .el-upload-list__item {
-            //         height: 100px;
-            //         width: 100px;
-            //     }
-            // }
-        }
-    }
-}
 </style>

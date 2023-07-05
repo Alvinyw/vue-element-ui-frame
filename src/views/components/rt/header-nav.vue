@@ -40,11 +40,11 @@ export default {
         },
     },
     watch: {
-        obj(oldVal, newVal) {
-            // console.log('====headerNav=======', oldVal, newVal)
-            if (oldVal == newVal) return;
-            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, headerNav: newVal });
-        },
+        // obj(oldVal, newVal) {
+        //     // console.log('====headerNav=======', oldVal, newVal)
+        //     if (JSON.stringify(oldVal) == JSON.stringify(newVal)) return;
+        //     this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, headerNav: newVal });
+        // },
     },
     mounted() {
 

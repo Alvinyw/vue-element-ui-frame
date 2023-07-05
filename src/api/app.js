@@ -4,9 +4,9 @@ import request from '@/utils/request'
  * 模版明细查询
  * @param {parm1} 参数1
  */
-export function perPageTemplateQry(data) {
+export function perTemplateQry(data) {
   return request({
-    url: '/perPageTemplateQry.do',
+    url: '/perTemplateQry.do',
     method: 'post',
     data,
   })
@@ -16,33 +16,33 @@ export function perPageTemplateQry(data) {
  * 模版新增
  * @param {parm1} 参数1
  */
- export function perPageTemplateAdd(data) {
+ export function perTemplateAdd(data) {
   return request({
-    url: '/perPageTemplateAdd.do',
+    url: '/perTemplateAdd.do',
     method: 'post',
     data,
   })
 }
 
 /**
- * 模版明细查询
+ * 模版删除
  * @param {parm1} 参数1
  */
- export function perPageTemplateDel(data) {
+ export function perTemplateDel(data) {
   return request({
-    url: '/perPageTemplateDel.do',
+    url: '/perTemplateDel.do',
     method: 'post',
     data,
   })
 }
 
 /**
- * 模版明细查询
+ * 模版更新
  * @param {parm1} 参数1
  */
- export function perPageTemplateUpd(data) {
+ export function perTemplateUpd(data) {
   return request({
-    url: '/perPageTemplateUpd.do',
+    url: '/perTemplateUpd.do',
     method: 'post',
     data,
   })

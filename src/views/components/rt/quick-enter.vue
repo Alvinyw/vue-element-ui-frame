@@ -48,6 +48,7 @@ export default {
     },
     data() {
         return {
+            obj: {},
             linkAry: [{
                 value: '1',
                 label: '首页'
@@ -65,14 +66,14 @@ export default {
     },
     computed: {
         ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
-        obj() {
-            const { property = {} } = this.options || {};
-            return property;
-        }
+        // obj() {
+        //     const { property = {} } = this.options || {};
+        //     return JSON.parse(JSON.stringify(property));
+        // }
     },
     watch: {
         obj(oldVal, newVal) {
-            // console.log('====obj-234=======', oldVal, newVal, oldVal == newVal)
+            console.log('====obj-234=======', oldVal, newVal, oldVal == newVal)
             if (JSON.stringify(oldVal) == JSON.stringify(newVal)) return;
             const { pageLayout = {} } = this.templateInfo;
             pageLayout.forEach((item, index) => {
@@ -82,6 +83,8 @@ export default {
         }
     },
     mounted() {
+        const { property = {} } = this.options || {};
+        this.obj = JSON.parse(JSON.stringify(property));
         // console.log('======obj=========', this.obj)
     },
     methods: {

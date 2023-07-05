@@ -154,16 +154,20 @@ export default {
         onHandleApply() {
             this.$store.dispatch("app/updateTemplateInfo", {});
         },
-        onAddSuCai(value = componentType.HEADR_NAV, update = true) {
-            this.$store.dispatch("app/updateCurrentComType", value);
+        onAddSuCai(val = componentType.HEADR_NAV, update = true) {
+            this.$store.dispatch("app/updateCurrentComType", val);
             if (!update) {
                 this.$store.dispatch("app/updateSelectedIndex", -1);
                 return;
             }
             const { pageLayout = [] } = this.templateInfo;
-            const _obj = componentProperty.filter(item => item.value == value)[0] || {};
+            const _obj = componentProperty.filter(item => item.value == val)[0] || {};
             // console.log('======_obj43343========', _obj)
-            pageLayout.push(JSON.parse(JSON.stringify(_obj)));
+            const { value = '', property = {} } = _obj;
+            pageLayout.push({
+                value,
+                property: { ...property }
+            });
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
             this.$store.dispatch("app/updateSelectedIndex", pageLayout.length - 1);
         }

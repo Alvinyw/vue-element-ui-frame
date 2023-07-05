@@ -156,10 +156,14 @@ export default {
         },
         onAddSuCai(value = componentType.HEADR_NAV, update = true) {
             this.$store.dispatch("app/updateCurrentComType", value);
-            if (!update) return;
+            if (!update) {
+                this.$store.dispatch("app/updateSelectedIndex", -1);
+                return;
+            }
             const { pageLayout = [] } = this.templateInfo;
             const _obj = componentProperty.filter(item => item.value == value)[0] || {};
-            pageLayout.push(_obj);
+            // console.log('======_obj43343========', _obj)
+            pageLayout.push(JSON.parse(JSON.stringify(_obj)));
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
             this.$store.dispatch("app/updateSelectedIndex", pageLayout.length - 1);
         }

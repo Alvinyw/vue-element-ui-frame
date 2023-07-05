@@ -44,6 +44,9 @@ export default {
             // console.log('====obj=======', newVal)
             if (oldVal == newVal) return;
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, headerNav: newVal });
+        },
+        templateInfo(val) {
+            console.log('======val33444======', val)
         }
     },
     mounted() {

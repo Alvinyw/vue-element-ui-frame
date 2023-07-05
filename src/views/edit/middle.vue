@@ -3,7 +3,7 @@
         <template v-for="(item, index) in componentAry">
             <div @click="onComponentChange(item, index)" :key="index"
                 :class="Number(selectedIndex) == Number(index) ? 'actived' : ''" class="com-item">
-                <component :is="item.component" :options="item.options">
+                <component :is="item.component" :options="item.options" :key="index">
                 </component>
                 <span class="del" @click.stop="onComponentDel(index)"><i class="el-icon-delete"></i></span>
             </div>
@@ -31,7 +31,7 @@ export default {
         componentAry() {
             const { pageLayout = {} } = this.templateInfo;
             const _c = mapToComponents(pageLayout);
-            console.log('======componentAry-1=========', _c)
+            // console.log('======componentAry-1=========', _c)
             return _c;
         }
     },

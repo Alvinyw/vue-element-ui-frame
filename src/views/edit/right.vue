@@ -1,6 +1,6 @@
 <template>
     <el-row class="rt">
-        <component :is="currentCom"></component>
+        <component :is="currentCom" :options="currentObj" :key="selectedIndex"></component>
     </el-row>
 </template>
 <script>
@@ -18,19 +18,12 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["templateInfo", "currentComType"]),
-        footerNav() {
-            const { footerNav = {} } = this.templateInfo;
-            return footerNav;
-        },
-        headerNav() {
-            const { headerNav = {} } = this.templateInfo;
-            return headerNav;
-        },
-        pageLayout() {
+        ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
+        currentObj() {
             const { pageLayout = {} } = this.templateInfo;
-            return pageLayout;
-        },
+            const _obj = pageLayout.filter((item, index) => index == this.selectedIndex)[0] || {};
+            return _obj;
+        }
     },
     watch: {
         currentComType(val) {

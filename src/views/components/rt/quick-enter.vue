@@ -18,7 +18,7 @@
                         </el-form-item>
                         <el-form-item label="链接">
                             <el-select v-model="obj.link" clearable placeholder="跳转链接">
-                                <el-option v-for="item in options" :key="item.value" :label="item.label"
+                                <el-option v-for="item in linkAry" :key="item.value" :label="item.label"
                                     :value="item.value">
                                 </el-option>
                             </el-select>
@@ -32,14 +32,23 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { componentType, componentTypeMap, componentProperty } from "@/const/componentType";
 
 
 export default {
     name: "QuickEnter",
+    props: {
+        options: {
+            type: Object,
+            required: false,
+            default: () => ({
+                property: {},
+                value: ''
+            }),
+        },
+    },
     data() {
         return {
-            options: [{
+            linkAry: [{
                 value: '1',
                 label: '首页'
             }, {
@@ -57,14 +66,14 @@ export default {
     computed: {
         ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
         obj() {
-            const _obj = componentProperty.filter(item => item.value == componentType.QUICK_ENTER)[0] || {};
-            return _obj.property;
+            const { property = {} } = this.options || {};
+            return property;
         }
     },
     watch: {
         obj(oldVal, newVal) {
-            // console.log('====obj=======', newVal)
-            if (oldVal == newVal) return;
+            // console.log('====obj-234=======', oldVal, newVal, oldVal == newVal)
+            if (JSON.stringify(oldVal) == JSON.stringify(newVal)) return;
             const { pageLayout = {} } = this.templateInfo;
             pageLayout.forEach((item, index) => {
                 if (index == this.selectedIndex) item.property = newVal;
@@ -78,7 +87,6 @@ export default {
     methods: {
         handleClick() { },
         handleRemove(file, fileList) {
-
         },
         handlePreview(file) {
         },

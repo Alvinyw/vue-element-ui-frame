@@ -1,9 +1,9 @@
 <template>
     <div class="quick-enter">
         <div class="item">
-            <img v-if="iconSrc" :src="iconSrc" />
+            <img v-if="options.icon" :src="options.icon" />
             <i v-else class="el-icon-s-home"></i>
-            <span>快捷入口</span>
+            <span>{{ options.text }}</span>
         </div>
     </div>
 </template>

@@ -52,7 +52,8 @@ export default {
             const { pageLayout = {} } = this.templateInfo;
             const _p = pageLayout.filter((item, index) => item && index !== idx);
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout: _p });
-            this.$store.dispatch("app/updateSelectedIndex", idx - 1);
+            this.$store.dispatch("app/updateSelectedIndex", - 1);
+            this.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
         }
     }
 };
@@ -87,7 +88,7 @@ export default {
 
         &.actived {
             .del {
-                display: block;
+                display: flex;
             }
         }
     }

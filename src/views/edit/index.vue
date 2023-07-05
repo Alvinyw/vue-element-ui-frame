@@ -48,13 +48,14 @@
             </el-row>
             <el-row class="md">
                 <el-row class="iphone-view">
-                    <div class="head-nav" :style="{ 'background-color': obj.bgColor }"
-                        @click="onAddSuCai(componentType.HEADR_NAV)">
+                    <div class="head-nav" :class="currentComType == componentType.HEADR_NAV ? 'actived' : ''"
+                        :style="{ 'background-color': obj.bgColor }" @click="onAddSuCai(componentType.HEADR_NAV, false)">
                         <img :src="bgHeaderNav" />
                         <h1 :style="{ 'color': obj.fontColor }">{{ obj.title }}</h1>
                     </div>
                     <MiddleIndex />
-                    <div class="footer-nav" @click="onAddSuCai(componentType.FOOTER_NAV)">
+                    <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
+                        @click="onAddSuCai(componentType.FOOTER_NAV, false)">
                         <div v-for="(item, index) in footerNav.list" :key="index" class="item">
                             <img :src="item.icon" />
                             <span class="nm">{{ item.name }}</span>
@@ -116,7 +117,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["templateInfo"]),
+        ...mapGetters(["templateInfo", "currentComType"]),
         footerNav() {
             const { footerNav = {} } = this.templateInfo;
             return footerNav;
@@ -153,12 +154,13 @@ export default {
         onHandleApply() {
             this.$store.dispatch("app/updateTemplateInfo", {});
         },
-        onAddSuCai(value = componentType.HEADR_NAV) {
+        onAddSuCai(value = componentType.HEADR_NAV, update = true) {
+            this.$store.dispatch("app/updateCurrentComType", value);
+            if (!update) return;
             const { pageLayout = [] } = this.templateInfo;
-            const _obj = componentProperty.filter(item => item.value == value)[0] || {}; 
+            const _obj = componentProperty.filter(item => item.value == value)[0] || {};
             pageLayout.push(_obj);
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
-            this.$store.dispatch("app/updateCurrentComType", value);
             this.$store.dispatch("app/updateSelectedIndex", pageLayout.length - 1);
         }
     }
@@ -281,6 +283,11 @@ export default {
                     box-sizing: border-box;
                     background-color: #fff;
                     transition: all 0.3s ease-in-out;
+                    border: 2px solid transparent;
+
+                    &.actived {
+                        border: 2px solid #7545F3
+                    }
 
                     img {
                         width: 100%;
@@ -304,6 +311,11 @@ export default {
                     display: flex;
                     justify-content: space-around;
                     background-color: #fff;
+                    border: 2px solid transparent;
+
+                    &.actived {
+                        border: 2px solid #7545F3
+                    }
 
                     .item {
                         display: flex;
@@ -325,4 +337,5 @@ export default {
             }
         }
     }
-}</style>
+}
+</style>

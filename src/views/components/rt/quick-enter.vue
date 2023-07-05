@@ -55,19 +55,21 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["templateInfo", "currentComType"]),
-        pageLayout() {
-            const { pageLayout = {} } = this.templateInfo;
-            return pageLayout;
-        },
+        ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
         obj() {
             const _obj = componentProperty.filter(item => item.value == componentType.QUICK_ENTER)[0] || {};
             return _obj.property;
         }
     },
     watch: {
-        obj(val) {
-            // console.log('=====val=======', val)
+        obj(oldVal, newVal) {
+            // console.log('====obj=======', newVal)
+            if (oldVal == newVal) return;
+            const { pageLayout = {} } = this.templateInfo;
+            pageLayout.forEach((item, index) => {
+                if (index == this.selectedIndex) item.property = newVal;
+            });
+            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
         }
     },
     mounted() {

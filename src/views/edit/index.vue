@@ -438,7 +438,7 @@ export default {
                                 width: 100%;
                                 font-size: 14px;
                                 text-align: center;
-                                color: #aaa !important;
+                                color: #000 !important;
                             }
 
                             &:hover {
@@ -446,6 +446,10 @@ export default {
                                 border-radius: 4px;
                                 color: #fff;
                                 cursor: pointer;
+
+                                .nm {
+                                    color: #fff !important;
+                                }
                             }
                         }
                     }
@@ -469,6 +473,7 @@ export default {
                         }
                     }
                 }
+
                 .moBan {
                     .item {
                         position: relative;

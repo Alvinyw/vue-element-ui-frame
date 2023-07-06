@@ -71,12 +71,12 @@ export default {
         // }
     },
     watch: {
-        obj(oldVal, newVal) {
+        obj(newVal, oldVal) {
             // console.log('====obj-234=======', oldVal, newVal, oldVal == newVal)
             if (JSON.stringify(oldVal) == JSON.stringify(newVal)) return;
             const { pageLayout = {} } = this.templateInfo;
             pageLayout.forEach((item, index) => {
-                if (index == this.selectedIndex) item.property = {...oldVal, ...newVal};
+                if (index == this.selectedIndex) item.property = {...newVal};
             });
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
         }

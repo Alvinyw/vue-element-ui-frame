@@ -63,7 +63,7 @@ export default {
         },
     },
     watch: {
-        obj(oldVal, newVal) {
+        obj(newVal, oldVal) {
             // console.log('====headerNav=======', oldVal, newVal)
             if (oldVal == newVal) return;
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, footerNav: newVal });

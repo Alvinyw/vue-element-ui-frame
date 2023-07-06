@@ -25,10 +25,10 @@
                         </el-form-item>
                         <el-form-item label="类型校验">
                             <el-select v-model="obj.type" clearable placeholder="类型校验">
-                                    <el-option v-for="item in typeAry" :key="item.value" :label="item.label"
-                                        :value="item.value">
-                                    </el-option>
-                                </el-select>
+                                <el-option v-for="item in typeAry" :key="item.value" :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                         <el-form-item label="错误提示">
                             <el-input v-model="obj.tipText"></el-input>
@@ -50,7 +50,6 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-
 
 export default {
     name: "PureText",
@@ -84,25 +83,24 @@ export default {
     },
     computed: {
         ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
-        // obj() {
-        //     const { property = {} } = this.options || {};
-        //     return JSON.parse(JSON.stringify(property));
-        // }
     },
     watch: {
-        obj(oldVal, newVal) {
-
-        }
+        obj: {
+            handler(newVal) {
+                const { pageLayout = {} } = this.templateInfo;
+                pageLayout.forEach((item, index) => {
+                    if (index == this.selectedIndex) item.property = { ...newVal };
+                });
+                this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
+            },
+            deep: true
+        },
     },
     mounted() {
         const { property = {} } = this.options || {};
-        this.obj = JSON.parse(JSON.stringify(property));
-        // console.log('======obj=========', this.obj)
+        this.obj = Object.assign({}, this.obj, { ...property })
     },
     methods: {
-        handleChange(file, fileList) {
-            // console.log('======file, fileList======', file, fileList)
-        }
     }
 };
 </script>

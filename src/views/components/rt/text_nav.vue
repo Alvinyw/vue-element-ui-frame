@@ -70,7 +70,7 @@ export default {
         // }
     },
     watch: {
-        obj(oldVal, newVal) {
+        obj(newVal, oldVal) {
 
         }
     },

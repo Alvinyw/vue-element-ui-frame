@@ -5,7 +5,7 @@
             <el-collapse-item title="样式设置" name="1">
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
-                        <el-form-item label="图片">
+                        <el-form-item label="图片列表">
                             <el-upload class="upload-demo" action="#" :on-change="handleChange" :auto-upload="false"
                                 :limit="10" :file-list="obj.imgs" list-type="picture">
                                 <el-button size="small" type="primary">添加图片</el-button>
@@ -54,7 +54,7 @@ export default {
         // }
     },
     watch: {
-        obj(oldVal, newVal) {
+        obj(newVal, oldVal) {
 
         }
     },

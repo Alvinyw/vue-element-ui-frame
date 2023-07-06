@@ -3,7 +3,7 @@
         <div class="item">
             <img v-if="options.property.icon.length" :src="options.property.icon[0].url" />
             <i v-else class="el-icon-s-home"></i>
-            <span>{{ options.property.text }}</span>
+            <span>{{ options.property.text || '快捷入口' }}</span>
         </div>
     </div>
 </template>

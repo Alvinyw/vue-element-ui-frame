@@ -264,7 +264,7 @@ export default {
             })
         },
         async onHandleSave() {
-            const { title = '首页' } = this.headerNav;
+            const { title = '首页' } = this.headerNav.property;
             this.updateTemplateId();
             const { templateId = '' } = this.$router.currentRoute.query;
             if (templateId) {

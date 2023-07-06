@@ -139,8 +139,8 @@ export const componentProperty = [
         value: componentType.QUICK_ENTER,
         property: {
             icon: [],
-            text: '',
-            link: '',
+            text: '快捷入口',
+            link: '2',
         },
     },
     {

@@ -4,8 +4,9 @@
       <el-menu :default-openeds="['1', '3']">
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-message"></i>页面列表</template>
-          <el-menu-item index="1-1">手机银行首页</el-menu-item>
-          <el-menu-item index="1-2">个人中心页面</el-menu-item>
+          <el-menu-item index="1-1">首页</el-menu-item>
+          <el-menu-item index="1-2">存款理财页面</el-menu-item>
+          <el-menu-item index="1-3">个人中心页面</el-menu-item>
         </el-submenu>
         <el-submenu index="3">
           <template slot="title"><i class="el-icon-setting"></i>审核中心</template>
@@ -21,6 +22,15 @@
     <el-container>
       <el-header style="text-align: left; font-size: 14px">
         页面模版列表
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            廖益文 - 渠道团队<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>设置</el-dropdown-item>
+            <el-dropdown-item>退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </el-header>
 
       <el-main class="tp-wrapper">
@@ -174,6 +184,8 @@ export default {
     line-height: 60px;
     border-bottom: 1px solid #ddd;
     box-shadow: #eee 5px 5px 8px 6px;
+    display: flex;
+    justify-content: space-between;
   }
 
   .el-aside {

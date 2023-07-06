@@ -1,14 +1,14 @@
 <template>
     <div class="img">
-        <el-carousel :interval="2000" arrow="always">
-            <el-carousel-item v-for="item in 2" :key="item">
-                <h3>图片{{ item }}</h3>
+        <el-carousel :indicator-position="options.property.showArrow ? '' : 'none'" :interval="2000" arrow="always">
+            <el-carousel-item v-for="item in imagesAry" :key="item.uid">
+                <h3 v-if="imagesAry.length < 1">图片{{ item }}</h3>
+                <img v-else :src="item.url" />
             </el-carousel-item>
         </el-carousel>
     </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
 
 export default {
     name: "Img",
@@ -24,25 +24,14 @@ export default {
     },
     data() {
         return {
-
+            imagesAry: [],
         }
     },
-    computed: {
-        ...mapGetters(["templateInfo", "currentComType"]),
-        // headerNav() {
-        //     const { headerNav = {} } = this.templateInfo;
-        //     return headerNav;
-        // },
-    },
-    watch: {
-
-    },
     mounted() {
-        // console.log('========this.options=========', this.options)
+        const { property = {} } = this.options || {};
+        const { imgs = [] } = property;
+        this.imagesAry = imgs || 3;
     },
-    methods: {
-
-    }
 };
 </script>
 
@@ -56,21 +45,29 @@ export default {
 
 <style scoped lang="less">
 .img {
-    .el-carousel__item h3 {
-        color: #475669;
-        font-size: 18px;
-        opacity: 0.75;
-        line-height: 250px;
+    .el-carousel__item {
         text-align: center;
-        margin: 0;
-    }
 
-    .el-carousel__item:nth-child(2n) {
-        background-color: #99a9bf;
-    }
+        h3 {
+            color: #475669;
+            font-size: 18px;
+            opacity: 0.75;
+            line-height: 250px;
+            text-align: center;
+            margin: 0;
+        }
 
-    .el-carousel__item:nth-child(2n+1) {
-        background-color: #d3dce6;
+        img {
+            height: 100%;
+        }
+
+        &:nth-child(2n) {
+            background-color: #99a9bf;
+        }
+
+        &:nth-child(2n+1) {
+            background-color: #d3dce6;
+        }
     }
 }
 </style>

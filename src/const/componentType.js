@@ -136,7 +136,7 @@ export const componentProperty = [
         property: {
             width: '100%',
             height: '100%',
-            radio: '4',
+            radius: '4',
             icon: [],
 
         },

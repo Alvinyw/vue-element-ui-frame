@@ -1,15 +1,14 @@
 <template>
     <div class="pure-img">
-        <img v-if="options.property.icon.length" :src="options.property.icon[0].url" />
+        <img v-if="options.property.icon.length"
+            :style="{ height: options.property.height, width: options.property.width, 'border-radius': options.property.radius + 'px' }"
+            :src="options.property.icon[0].url" />
         <div v-else class="empty">
             在右侧编辑区添加图片<br />建议宽度375px
         </div>
     </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { componentType, componentTypeMap } from "@/const/componentType";
-
 
 export default {
     name: "PureImg",
@@ -23,27 +22,6 @@ export default {
             }),
         },
     },
-    data() {
-        return {
-
-        }
-    },
-    computed: {
-        ...mapGetters(["templateInfo", "currentComType"]),
-        // headerNav() {
-        //     const { headerNav = {} } = this.templateInfo;
-        //     return headerNav;
-        // },
-    },
-    watch: {
-
-    },
-    mounted() {
-        // console.log('========this.options=========', this.options)
-    },
-    methods: {
-
-    }
 };
 </script>
 
@@ -65,7 +43,7 @@ export default {
     }
 
     img {
-        width: 100%;
+        max-width: 100%;
     }
 }
 </style>

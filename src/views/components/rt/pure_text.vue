@@ -100,8 +100,6 @@ export default {
         const { property = {} } = this.options || {};
         this.obj = Object.assign({}, this.obj, { ...property })
     },
-    methods: {
-    }
 };
 </script>
 

@@ -180,18 +180,18 @@ export default {
 .home-index {
   .el-header {
     background-color: #fdfdfd;
-    color: #333;
+    color: #aaa;
     line-height: 60px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #aaa;
     box-shadow: #eee 5px 5px 8px 6px;
     display: flex;
     justify-content: space-between;
   }
 
   .el-aside {
-    color: #333;
+    color: #aaa;
     background-color: #fff;
-    border-right: solid 1px #e6e6e6;
+    border-right: solid 1px #aaa;
 
     .el-menu {
       border: none;
@@ -205,7 +205,7 @@ export default {
       margin: 15px;
       width: 200px;
       height: 310px;
-      border: 1px solid #ddd;
+      border: 1px solid #aaa;
       text-align: center;
       cursor: pointer;
 
@@ -229,7 +229,7 @@ export default {
       margin: 15px;
       width: 200px;
       height: 310px;
-      border: 1px solid #ddd;
+      border: 1px solid #aaa;
       background-image: url("../../assets/images/tp_bg.png");
       background-repeat: no-repeat;
       background-size: contain;
@@ -252,7 +252,7 @@ export default {
           align-items: center;
           margin: 5px 0 0;
           height: 30px;
-          border-top: 1px solid #ddd;
+          border-top: 1px solid #aaa;
         }
       }
     }

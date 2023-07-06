@@ -82,7 +82,7 @@ export default {
 .footer-com {
     .sec {
         margin: 0 0 20px;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid #aaa;
     }
 }
 </style>

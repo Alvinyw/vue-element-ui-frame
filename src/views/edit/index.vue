@@ -438,6 +438,7 @@ export default {
                                 width: 100%;
                                 font-size: 14px;
                                 text-align: center;
+                                color: #aaa !important;
                             }
 
                             &:hover {
@@ -454,7 +455,7 @@ export default {
                     .item {
                         width: 100%;
                         margin: 0 0 15px;
-                        border: 1px solid #ddd;
+                        border: 1px solid #aaa;
                         border-radius: 4px;
 
                         &:hover {
@@ -475,7 +476,7 @@ export default {
                         width: 149px;
                         margin: 0 0 10px;
                         padding: 0 0 25px;
-                        border: 1px solid #ddd;
+                        border: 1px solid #aaa;
 
                         &:hover {
                             cursor: pointer;
@@ -499,7 +500,7 @@ export default {
                             text-align: center;
                             font-size: 14px;
                             line-height: 24px;
-                            border-top: 1px solid #ddd;
+                            border-top: 1px solid #aaa;
                         }
                     }
                 }
@@ -524,7 +525,7 @@ export default {
                 width: 375px;
                 height: 644px;
                 background-color: #f5f5f5;
-                box-shadow: 0 2px 4px 4px #ddd;
+                box-shadow: 0 2px 4px 4px #ccc;
 
                 .head-nav {
                     display: flex;

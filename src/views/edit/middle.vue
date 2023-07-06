@@ -18,19 +18,26 @@ import { componentType, componentTypeMap } from "@/const/componentType";
 export default {
     name: "MiddleIndex",
     components: {},
+    props: {
+        pageLayout: {
+            type: Array,
+            required: false,
+            default: () => ([]),
+        },
+    },
     data() {
         return {
         }
     },
     computed: {
         ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
-        pageLayout() {
-            const { pageLayout = {} } = this.templateInfo;
-            return pageLayout;
-        },
+        // pageLayout() {
+        //     const { pageLayout = {} } = this.templateInfo;
+        //     return pageLayout;
+        // },
         componentAry() {
-            const { pageLayout = {} } = this.templateInfo;
-            const _c = mapToComponents(pageLayout);
+            // const { pageLayout = {} } = this.templateInfo;
+            const _c = mapToComponents(this.pageLayout);
             console.log('======componentAry-1=========', _c)
             return _c;
         }

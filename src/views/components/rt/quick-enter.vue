@@ -72,11 +72,11 @@ export default {
     },
     watch: {
         obj(oldVal, newVal) {
-            console.log('====obj-234=======', oldVal, newVal, oldVal == newVal)
+            // console.log('====obj-234=======', oldVal, newVal, oldVal == newVal)
             if (JSON.stringify(oldVal) == JSON.stringify(newVal)) return;
             const { pageLayout = {} } = this.templateInfo;
             pageLayout.forEach((item, index) => {
-                if (index == this.selectedIndex) item.property = newVal;
+                if (index == this.selectedIndex) item.property = {...oldVal, ...newVal};
             });
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
         }
@@ -84,11 +84,11 @@ export default {
     mounted() {
         const { property = {} } = this.options || {};
         this.obj = JSON.parse(JSON.stringify(property));
-        console.log('======obj=========', this.obj)
+        // console.log('======obj=========', this.obj)
     },
     methods: {
         handleChange(file, fileList) {
-            console.log('======file, fileList======', file, fileList)
+            // console.log('======file, fileList======', file, fileList)
         }
     }
 };

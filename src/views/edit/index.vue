@@ -54,7 +54,7 @@
                         <img :src="bgHeaderNav" />
                         <h1 :style="{ 'color': headerNav.fontColor }">{{ headerNav.title }}</h1>
                     </div>
-                    <MiddleIndex />
+                    <MiddleIndex :page-layout="pageLayout" />
                     <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
                         @click="onAddSuCai(componentType.FOOTER_NAV, false)">
                         <div v-for="(item, index) in footerNav.property.list" :key="index" class="item">
@@ -64,7 +64,7 @@
                     </div>
                 </el-row>
             </el-row>
-            <RightIndex />
+            <RightIndex :page-layout="pageLayout" />
         </el-main>
         <el-dialog title="选择应用系统" :visible.sync="dialogTableVisible">
             <el-table class="dig-tb" ref="multipleTable" :data="appList" tooltip-effect="dark">
@@ -157,6 +157,10 @@ export default {
         footerNav() {
             const { footerNav = {} } = this.templateInfo;
             return footerNav;
+        },
+        pageLayout() {
+            const { pageLayout = {} } = this.templateInfo;
+            return pageLayout;
         },
         headerNav() {
             const { headerNav = {} } = this.templateInfo;

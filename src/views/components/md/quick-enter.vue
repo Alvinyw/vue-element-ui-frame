@@ -1,9 +1,9 @@
 <template>
     <div class="quick-enter">
         <div class="item">
-            <img v-if="options.icon" :src="options.icon" />
+            <img v-if="options.property.icon.length" :src="options.property.icon[0].url" />
             <i v-else class="el-icon-s-home"></i>
-            <span>{{ options.text }}</span>
+            <span>{{ options.property.text }}</span>
         </div>
     </div>
 </template>
@@ -36,16 +36,16 @@ export default {
     },
     computed: {
         ...mapGetters(["templateInfo", "currentComType"]),
-        headerNav() {
-            const { headerNav = {} } = this.templateInfo;
-            return headerNav;
-        },
+        // headerNav() {
+        //     const { headerNav = {} } = this.templateInfo;
+        //     return headerNav;
+        // },
     },
     watch: {
 
     },
     mounted() {
-
+        // console.log('========this.options=========', this.options)
     },
     methods: {
         

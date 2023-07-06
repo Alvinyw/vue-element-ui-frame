@@ -121,7 +121,9 @@ export const componentProperty = [
     {
         value: componentType.PURE_IMG,
         property: {
-            color: '',
+            width: '100%',
+            height: '100%',
+            radio: '4',
             icon: [],
 
         },

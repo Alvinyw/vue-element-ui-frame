@@ -46,6 +46,9 @@
                         </el-collapse>
                     </el-row>
                     <el-row v-else-if="activtedIndex == '2'" class="suCai">
+                        <div v-for="(item, index) in SuCai" :key="index" class="item">
+                            <img :src="item" />
+                        </div>
                     </el-row>
                     <el-row v-else class="moBan">
                         <div v-for="(item, index) in MoBan" :key="index" class="item">
@@ -103,11 +106,17 @@ import RightIndex from "./right.vue";
 import { componentType, componentTypeMap, componentProperty } from "@/const/componentType";
 import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
 import previewCode from '@/assets/images/preview_code.png';
+// 模版
 import img_moban_1 from '@/assets/images/img_moban_1.jpg';
 import img_moban_2 from '@/assets/images/img_moban_2.jpg';
 import img_moban_3 from '@/assets/images/img_moban_3.jpg';
-import img_moban_4 from '@/assets/images/img_moban_4.jpg';
+import img_moban_4 from '@/assets/images/img_moban_4.png';
 import img_moban_5 from '@/assets/images/img_moban_5.jpg';
+// 素材
+import img_sucai_1 from '@/assets/images/img_sucai_1.jpg';
+import img_sucai_2 from '@/assets/images/img_sucai_2.jpg';
+import img_sucai_3 from '@/assets/images/img_sucai_3.jpg';
+import img_sucai_4 from '@/assets/images/img_sucai_4.jpg';
 
 const ZuJian = [
     {
@@ -138,7 +147,7 @@ const ZuJian = [
         ]
     }
 ];
-const SUCai = [];
+const SuCai = [img_sucai_1, img_sucai_2, img_sucai_3, img_sucai_4];
 const MoBan = [
     img_moban_1, img_moban_5, img_moban_2, img_moban_3, img_moban_4
 ];
@@ -151,6 +160,7 @@ export default {
             activeNames: ['1', '2', '3'],
             ZuJian,
             MoBan,
+            SuCai,
             componentType,
             bgHeaderNav,
             previewCode,
@@ -439,6 +449,24 @@ export default {
                     }
                 }
 
+                .suCai {
+                    .item {
+                        width: 100%;
+                        margin: 0 0 15px;
+                        border: 1px solid #ddd;
+                        border-radius: 4px;
+
+                        &:hover {
+                            cursor: pointer;
+                            border-color: #7545F3;
+                        }
+
+                        img {
+                            width: 100%;
+                            vertical-align: text-bottom;
+                        }
+                    }
+                }
                 .moBan {
                     .item {
                         position: relative;
@@ -447,6 +475,7 @@ export default {
                         margin: 0 0 10px;
                         padding: 0 0 25px;
                         border: 1px solid #ddd;
+
                         &:hover {
                             cursor: pointer;
                             border-color: #7545F3;

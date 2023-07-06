@@ -6,13 +6,21 @@
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
                         <el-form-item label="图标">
-                            <el-upload class="upload-demo" action="#" :on-change="handleChange" :auto-upload="false" :limit="1" :file-list="obj.icon"
-                                list-type="picture">
+                            <el-upload class="upload-demo" action="#" :on-change="handleChange" :auto-upload="false"
+                                :limit="1" :file-list="obj.icon" list-type="picture">
                                 <el-button size="small" type="primary">添加图标</el-button>
                                 <div slot="tip" class="el-upload__tip"></div>
                             </el-upload>
                         </el-form-item>
-                        
+                        <el-form-item label="图片宽度">
+                            <el-input v-model="obj.width"></el-input>
+                        </el-form-item>
+                        <el-form-item label="图片高度">
+                            <el-input v-model="obj.height"></el-input>
+                        </el-form-item>
+                        <el-form-item label="圆角">
+                            <el-input v-model="obj.radio"><template slot="append">px</template></el-input>
+                        </el-form-item>
                     </el-form>
                 </el-row>
             </el-collapse-item>
@@ -50,7 +58,7 @@ export default {
     },
     watch: {
         obj(oldVal, newVal) {
-            
+
         }
     },
     mounted() {
@@ -67,7 +75,5 @@ export default {
 </script>
 
 <style lang="less">
-.pure-img {
-
-}
+.pure-img {}
 </style>

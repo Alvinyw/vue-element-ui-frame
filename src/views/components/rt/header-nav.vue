@@ -6,13 +6,13 @@
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
                         <el-form-item label="页面标题">
-                            <el-input v-model="obj.title"></el-input>
+                            <el-input v-model="obj.property.title"></el-input>
                         </el-form-item>
                         <el-form-item label="标题颜色">
-                            <el-color-picker v-model="obj.fontColor" show-alpha></el-color-picker>
+                            <el-color-picker v-model="obj.property.fontColor" show-alpha></el-color-picker>
                         </el-form-item>
                         <el-form-item label="背景颜色">
-                            <el-color-picker v-model="obj.bgColor" show-alpha></el-color-picker>
+                            <el-color-picker v-model="obj.property.bgColor" show-alpha></el-color-picker>
                         </el-form-item>
                     </el-form>
                 </el-row>

@@ -61,10 +61,10 @@
             <el-row class="md">
                 <el-row class="iphone-view">
                     <div class="head-nav" :class="currentComType == componentType.HEADR_NAV ? 'actived' : ''"
-                        :style="{ 'background-color': headerNav.bgColor }"
+                        :style="{ 'background-color': headerNav.property.bgColor }"
                         @click="onAddZuJian(componentType.HEADR_NAV, false)">
                         <img :src="bgHeaderNav" />
-                        <h1 :style="{ 'color': headerNav.fontColor }">{{ headerNav.title }}</h1>
+                        <h1 :style="{ 'color': headerNav.property.fontColor }">{{ headerNav.property.title }}</h1>
                     </div>
                     <MiddleIndex :page-layout="pageLayout" />
                     <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"

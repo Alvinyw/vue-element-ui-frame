@@ -1,4 +1,5 @@
 import { getUUID } from "../../utils/lib"
+import { componentType } from "../../const/componentType";
 
 export default {
   namespaced: true,
@@ -7,13 +8,17 @@ export default {
     selectedIndex: '0', // 当前选中的组件 index
     templateInfo: {
       headerNav: {
-        bgColor: "rgba(255, 255, 255, 1)",
-        fontColor: "rgba(0, 0, 0, 1)",
-        title: '页面标题'
+        value: componentType.HEADR_NAV,
+        property: {
+          bgColor: "rgba(255, 255, 255, 1)",
+          fontColor: "rgba(0, 0, 0, 1)",
+          title: '页面标题'
+        }
       },
       pageLayout: [
       ],
       footerNav: {
+        value: componentType.FOOTER_NAV,
         property: {
           activeColor: "#E74C75",
           bgColor: "#FFF",

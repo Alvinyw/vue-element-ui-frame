@@ -66,6 +66,8 @@ export default {
 
 <style scoped lang="less">
 .md-main {
+    height: 530px;
+    overflow: scroll;
     .com-item {
         position: relative;
         cursor: pointer;
@@ -83,6 +85,7 @@ export default {
             position: absolute;
             right: 0;
             top: 0;
+            z-index: 2;
             width: 24px;
             height: 24px;
             font-size: 16px;

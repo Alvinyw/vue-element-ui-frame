@@ -91,7 +91,9 @@ export const componentProperty = [
     {
         value: componentType.IMG,
         property: {
-            color: '',
+            height: '250',
+            showArrow: true,
+            imgs: []
         },
     },
     {

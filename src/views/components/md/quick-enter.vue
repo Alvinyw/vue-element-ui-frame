@@ -1,16 +1,15 @@
 <template>
     <div class="quick-enter">
         <div class="item">
-            <img v-if="options.property.icon.length" :src="options.property.icon[0].url" />
+            <img v-if="options.property.icon.length" :src="options.property.icon[0].url"
+                :style="{ 'width': options.property.iconSize + 'px' }" />
             <i v-else class="el-icon-s-home"></i>
-            <span>{{ options.property.text || '快捷入口' }}</span>
+            <span :style="{ 'color': options.property.color, 'font-size': options.property.fontSize + 'px' }">{{
+                options.property.text || '快捷入口' }}</span>
         </div>
     </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { componentType, componentTypeMap } from "@/const/componentType";
-
 
 export default {
     name: "QuickEnter",
@@ -24,32 +23,6 @@ export default {
             }),
         },
     },
-    data() {
-        return {
-            iconSrc: '',
-            componentType,
-            // 图片上传
-            dialogImageUrl: '',
-            dialogVisible: false,
-            disabled: false
-        }
-    },
-    computed: {
-        ...mapGetters(["templateInfo", "currentComType"]),
-        // headerNav() {
-        //     const { headerNav = {} } = this.templateInfo;
-        //     return headerNav;
-        // },
-    },
-    watch: {
-
-    },
-    mounted() {
-        // console.log('========this.options=========', this.options)
-    },
-    methods: {
-        
-    }
 };
 </script>
 

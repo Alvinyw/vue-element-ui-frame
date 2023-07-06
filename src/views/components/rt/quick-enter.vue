@@ -6,14 +6,23 @@
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
                         <el-form-item label="图标">
-                            <el-upload class="upload-demo" action="#" :on-change="handleChange" :auto-upload="false" :limit="1" :file-list="obj.icon"
-                                list-type="picture">
+                            <el-upload class="upload-demo" action="#" :on-change="handleChange" :auto-upload="false"
+                                :limit="1" :file-list="obj.icon" list-type="picture">
                                 <el-button size="small" type="primary">添加图标</el-button>
                                 <div slot="tip" class="el-upload__tip"></div>
                             </el-upload>
                         </el-form-item>
+                        <el-form-item label="图标大小">
+                            <el-input v-model="obj.iconSize"><template slot="append">px</template></el-input>
+                        </el-form-item>
                         <el-form-item label="文本">
                             <el-input v-model="obj.text"></el-input>
+                        </el-form-item>
+                        <el-form-item label="字体颜色">
+                            <el-color-picker v-model="obj.color" show-alpha></el-color-picker>
+                        </el-form-item>
+                        <el-form-item label="字体大小">
+                            <el-input v-model="obj.fontSize"><template slot="append">px</template></el-input>
                         </el-form-item>
                         <el-form-item label="链接">
                             <el-select v-model="obj.link" clearable placeholder="跳转链接">
@@ -64,35 +73,30 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
-        // obj() {
-        //     const { property = {} } = this.options || {};
-        //     return JSON.parse(JSON.stringify(property));
-        // }
+        ...mapGetters(["templateInfo", "selectedIndex"]),
     },
     watch: {
-        obj(newVal, oldVal) {
-            // console.log('====obj-234=======', oldVal, newVal, oldVal == newVal)
-            if (JSON.stringify(oldVal) == JSON.stringify(newVal)) return;
-            const { pageLayout = {} } = this.templateInfo;
-            pageLayout.forEach((item, index) => {
-                if (index == this.selectedIndex) item.property = {...newVal};
-            });
-            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
-        }
+        obj: {
+            handler(newVal) {
+                const { pageLayout = {} } = this.templateInfo;
+                pageLayout.forEach((item, index) => {
+                    if (index == this.selectedIndex) item.property = { ...newVal };
+                });
+                this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
+            },
+            deep: true
+        },
     },
     mounted() {
         const { property = {} } = this.options || {};
-        this.obj = JSON.parse(JSON.stringify(property));
-        // console.log('======obj=========', this.obj)
+        this.obj = Object.assign({}, this.obj, { ...property })
     },
     methods: {
         handleChange(file, fileList) {
-            // console.log('======file, fileList======', file, fileList)
+            if (file) this.obj.icon.push(file)
         }
     }
 };
 </script>
 
-<style lang="less">
-</style>
+<style lang="less"></style>

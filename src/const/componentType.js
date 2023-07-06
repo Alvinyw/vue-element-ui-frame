@@ -99,13 +99,18 @@ export const componentProperty = [
     {
         value: componentType.TEXT_NAV,
         property: {
-            color: '',
+            text: '',
+            fontSize: '14',
+            color: '#000',
+            link: '',
         },
     },
     {
         value: componentType.PURE_TEXT,
         property: {
-            color: '',
+            text: '',
+            fontSize: '14',
+            color: '#000',
         },
     },
     {

@@ -10,6 +10,7 @@ export const componentType = {
     TITLE: 5, // 标题
     PURE_IMG: 6, // 图片
     QUICK_ENTER: 7, // 快捷入口
+    MARGIN: 8, // 间隔
 
     // 业务组件
     LICAI: 11, // 理财
@@ -25,6 +26,11 @@ export const componentType = {
 };
 
 export const componentTypeMap = [
+    {
+        value: componentType.MARGIN,
+        icon: 'el-icon-picture',
+        name: '间隔',
+    },
     {
         value: componentType.IMG,
         icon: 'el-icon-picture',
@@ -88,6 +94,12 @@ export const componentTypeMap = [
 ];
 
 export const componentProperty = [
+    {
+        value: componentType.MARGIN,
+        property: {
+            height: '15',
+        },
+    },
     {
         value: componentType.IMG,
         property: {

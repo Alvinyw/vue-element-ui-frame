@@ -14,6 +14,8 @@ import PureImg_rt from "../components/rt/pure-img.vue";
 import Img_rt from "../components/rt/img.vue";
 import PureText_rt from "../components/rt/pure_text.vue";
 import TextNav_rt from "../components/rt/text_nav.vue";
+import Margin from "../components/md/margin.vue";
+import Margin_rt from "../components/rt/margin.vue";
 
 export const mdComponentBaseMap = {
     [componentType.QUICK_ENTER]: QuickEnter,
@@ -21,6 +23,7 @@ export const mdComponentBaseMap = {
     [componentType.IMG]: Img,
     [componentType.PURE_TEXT]: PureText,
     [componentType.TEXT_NAV]: TextNav,
+    [componentType.MARGIN]: Margin,
 }
 
 export function mapToMdComponents(list = []) {
@@ -37,6 +40,7 @@ export const rtComponentBaseMap = {
     [componentType.IMG]: Img_rt,
     [componentType.PURE_TEXT]: PureText_rt,
     [componentType.TEXT_NAV]: TextNav_rt,
+    [componentType.MARGIN]: Margin_rt,
 }
 export function mapToRtComponents(val = componentType.HEADR_NAV) {
     return rtComponentBaseMap[val];

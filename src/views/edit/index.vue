@@ -130,6 +130,7 @@ const ZuJian = [
             componentType.PURE_IMG,
             componentType.IMG,
             componentType.QUICK_ENTER,
+            componentType.MARGIN,
         ]
     },
     {

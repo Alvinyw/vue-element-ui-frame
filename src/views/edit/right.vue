@@ -5,14 +5,13 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { mapToRtComponents } from "./utils";
 import HeaderNav from "../components/rt/header-nav.vue";
-import FooterNav from "../components/rt/footer-nav.vue";
-import QuickEnter from "../components/rt/quick-enter.vue";
 import { componentType, componentTypeMap } from "@/const/componentType";
 
 export default {
     name: "RightIndex",
-    components: { HeaderNav, QuickEnter },
+    components: { HeaderNav },
     props: {
         pageLayout: {
             type: Array,
@@ -35,18 +34,7 @@ export default {
     },
     watch: {
         currentComType(val) {
-            // console.log('======currentComType=========', val)
-            switch (Number(val)) {
-                case componentType.QUICK_ENTER:
-                    this.currentCom = QuickEnter;
-                    break;
-                case componentType.FOOTER_NAV:
-                    this.currentCom = FooterNav;
-                    break;
-                default:
-                    this.currentCom = HeaderNav;
-                    break;
-            }
+            this.currentCom = mapToRtComponents(val);
         }
     },
     mounted() {

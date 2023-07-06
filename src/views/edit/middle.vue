@@ -12,7 +12,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { mapToComponents } from "./utils";
+import { mapToMdComponents } from "./utils";
 import { componentType, componentTypeMap } from "@/const/componentType";
 
 export default {
@@ -37,7 +37,7 @@ export default {
         // },
         componentAry() {
             // const { pageLayout = {} } = this.templateInfo;
-            const _c = mapToComponents(this.pageLayout);
+            const _c = mapToMdComponents(this.pageLayout);
             console.log('======componentAry-1=========', _c)
             return _c;
         }

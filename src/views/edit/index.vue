@@ -14,30 +14,30 @@
                     <li label="模版" :class="activtedIndex == '3' ? 'activted' : ''" @click="onHandleTabClick('3')">模版</li>
                 </ul>
                 <el-row class="content-wrapper">
-                    <el-row class="sucai">
+                    <el-row v-if="activtedIndex == '1'" class="zuJian">
                         <el-collapse v-model="activeNames">
-                            <el-collapse-item :title="SuCai[0].title" name="1">
+                            <el-collapse-item :title="ZuJian[0].title" name="1">
                                 <el-row class="item-wrapper">
-                                    <div v-for="(item, index) in suCaiComInfo[0]" :key="index" class="item"
-                                        @click="onAddSuCai(item.value)">
+                                    <div v-for="(item, index) in zuJianComInfo[0]" :key="index" class="item"
+                                        @click="onAddZuJian(item.value)">
                                         <i :class="item.icon"></i>
                                         <span class="nm">{{ item.name }}</span>
                                     </div>
                                 </el-row>
                             </el-collapse-item>
-                            <el-collapse-item :title="SuCai[1].title" name="2">
+                            <el-collapse-item :title="ZuJian[1].title" name="2">
                                 <el-row class="item-wrapper">
-                                    <div v-for="(item, index) in suCaiComInfo[1]" :key="index" class="item"
-                                        @click="onAddSuCai(item.value)">
+                                    <div v-for="(item, index) in zuJianComInfo[1]" :key="index" class="item"
+                                        @click="onAddZuJian(item.value)">
                                         <i :class="item.icon"></i>
                                         <span class="nm">{{ item.name }}</span>
                                     </div>
                                 </el-row>
                             </el-collapse-item>
-                            <el-collapse-item :title="SuCai[2].title" name="3">
+                            <el-collapse-item :title="ZuJian[2].title" name="3">
                                 <el-row class="item-wrapper">
-                                    <div v-for="(item, index) in suCaiComInfo[2]" :key="index" class="item"
-                                        @click="onAddSuCai(item.value)">
+                                    <div v-for="(item, index) in zuJianComInfo[2]" :key="index" class="item"
+                                        @click="onAddZuJian(item.value)">
                                         <i :class="item.icon"></i>
                                         <span class="nm">{{ item.name }}</span>
                                     </div>
@@ -45,19 +45,27 @@
                             </el-collapse-item>
                         </el-collapse>
                     </el-row>
+                    <el-row v-else-if="activtedIndex == '2'" class="suCai">
+                    </el-row>
+                    <el-row v-else class="moBan">
+                        <div v-for="(item, index) in MoBan" :key="index" class="item">
+                            <img :src="item" />
+                            <span>618活动首页模版</span>
+                        </div>
+                    </el-row>
                 </el-row>
             </el-row>
             <el-row class="md">
                 <el-row class="iphone-view">
                     <div class="head-nav" :class="currentComType == componentType.HEADR_NAV ? 'actived' : ''"
                         :style="{ 'background-color': headerNav.bgColor }"
-                        @click="onAddSuCai(componentType.HEADR_NAV, false)">
+                        @click="onAddZuJian(componentType.HEADR_NAV, false)">
                         <img :src="bgHeaderNav" />
                         <h1 :style="{ 'color': headerNav.fontColor }">{{ headerNav.title }}</h1>
                     </div>
                     <MiddleIndex :page-layout="pageLayout" />
                     <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
-                        @click="onAddSuCai(componentType.FOOTER_NAV, false)">
+                        @click="onAddZuJian(componentType.FOOTER_NAV, false)">
                         <div v-for="(item, index) in footerNav.property.list" :key="index" class="item">
                             <img :src="item.icon[0].url" />
                             <span class="nm">{{ item.text }}</span>
@@ -95,8 +103,13 @@ import RightIndex from "./right.vue";
 import { componentType, componentTypeMap, componentProperty } from "@/const/componentType";
 import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
 import previewCode from '@/assets/images/preview_code.png';
+import img_moban_1 from '@/assets/images/img_moban_1.jpg';
+import img_moban_2 from '@/assets/images/img_moban_2.jpg';
+import img_moban_3 from '@/assets/images/img_moban_3.jpg';
+import img_moban_4 from '@/assets/images/img_moban_4.jpg';
+import img_moban_5 from '@/assets/images/img_moban_5.jpg';
 
-const SuCai = [
+const ZuJian = [
     {
         title: '基础组件',
         list: [
@@ -124,7 +137,11 @@ const SuCai = [
             componentType.WANGDIAN,
         ]
     }
-]
+];
+const SUCai = [];
+const MoBan = [
+    img_moban_1, img_moban_5, img_moban_2, img_moban_3, img_moban_4
+];
 export default {
     name: "EditIndex",
     components: { MiddleIndex, RightIndex },
@@ -132,11 +149,12 @@ export default {
         return {
             activtedIndex: '1',
             activeNames: ['1', '2', '3'],
-            SuCai,
+            ZuJian,
+            MoBan,
             componentType,
             bgHeaderNav,
             previewCode,
-            suCaiComInfo: [],
+            zuJianComInfo: [],
             templateId: new Date().getTime().toString(),
             dialogTableVisible: false,
             dialogPreviewCodeVisible: false,
@@ -227,12 +245,12 @@ export default {
             this.activtedIndex = index;
         },
         generateComInfo() {
-            SuCai.forEach(item => {
+            ZuJian.forEach(item => {
                 let _t = [];
                 item.list.forEach(a => {
                     _t.push(componentTypeMap.filter(b => b.value == a)[0])
                 })
-                this.suCaiComInfo.push(_t)
+                this.zuJianComInfo.push(_t)
             })
         },
         async onHandleSave() {
@@ -288,7 +306,7 @@ export default {
                     this.dialogTableVisible = false;
                 });
         },
-        onAddSuCai(val = componentType.HEADR_NAV, update = true) {
+        onAddZuJian(val = componentType.HEADR_NAV, update = true) {
             this.$store.dispatch("app/updateCurrentComType", val);
             if (!update) {
                 this.$store.dispatch("app/updateSelectedIndex", -1);
@@ -389,7 +407,7 @@ export default {
                 height: calc(100vh - 118px);
                 overflow: scroll;
 
-                .sucai {
+                .zuJian {
                     .item-wrapper {
 
                         .item {
@@ -417,6 +435,41 @@ export default {
                                 color: #fff;
                                 cursor: pointer;
                             }
+                        }
+                    }
+                }
+
+                .moBan {
+                    .item {
+                        position: relative;
+                        display: inline-block;
+                        width: 149px;
+                        margin: 0 0 10px;
+                        padding: 0 0 25px;
+                        border: 1px solid #ddd;
+                        &:hover {
+                            cursor: pointer;
+                            border-color: #7545F3;
+                        }
+
+                        &:nth-child(2n) {
+                            margin: 0 0 0 4px;
+                        }
+
+                        img {
+                            width: 100%;
+                        }
+
+                        span {
+                            display: inline-block;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 100%;
+                            text-align: center;
+                            font-size: 14px;
+                            line-height: 24px;
+                            border-top: 1px solid #ddd;
                         }
                     }
                 }

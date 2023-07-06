@@ -32,17 +32,17 @@ export const componentTypeMap = [
     },
     {
         value: componentType.TEXT_NAV,
-        icon: 'el-icon-picture',
+        icon: 'el-icon-document',
         name: '文本导航',
     },
     {
         value: componentType.PURE_TEXT,
-        icon: 'el-icon-picture',
+        icon: 'el-icon-document',
         name: '文本',
     },
     {
         value: componentType.RICH_TEXT,
-        icon: 'el-icon-picture',
+        icon: 'el-icon-document',
         name: '富文本',
     },
     {
@@ -57,7 +57,7 @@ export const componentTypeMap = [
     },
     {
         value: componentType.QUICK_ENTER,
-        icon: 'el-icon-picture',
+        icon: 'el-icon-document-copy',
         name: '快捷入口',
     },
     {
@@ -122,6 +122,8 @@ export const componentProperty = [
         value: componentType.PURE_IMG,
         property: {
             color: '',
+            icon: [],
+
         },
     },
     {
@@ -178,30 +180,30 @@ export const componentProperty = [
             defaultColor: "#666",
             list: [
                 {
-                  icon: ["https://b.yzcdn.cn/public_files/d3d6648d247605d7f9a37114ccb398dd.png"],
-                  iconActive: ["https://b.yzcdn.cn/public_files/29fe5014bcb19d4ebffac87a3cf4cb68.png"],
-                  link: "1",
-                  text: "首页"
+                    icon: ["https://b.yzcdn.cn/public_files/d3d6648d247605d7f9a37114ccb398dd.png"],
+                    iconActive: ["https://b.yzcdn.cn/public_files/29fe5014bcb19d4ebffac87a3cf4cb68.png"],
+                    link: "1",
+                    text: "首页"
                 },
                 {
-                  icon: ["https://b.yzcdn.cn/public_files/b26f9134010831fc346b010f09fcf55c.png"],
-                  iconActive: ["https://b.yzcdn.cn/public_files/8cca4c2c2bbe5744ba78e4a0941410ef.png"],
-                  link: "2",
-                  text: "预约"
+                    icon: ["https://b.yzcdn.cn/public_files/b26f9134010831fc346b010f09fcf55c.png"],
+                    iconActive: ["https://b.yzcdn.cn/public_files/8cca4c2c2bbe5744ba78e4a0941410ef.png"],
+                    link: "2",
+                    text: "预约"
                 },
                 {
-                  icon: ["https://b.yzcdn.cn/public_files/c43a360c499dd012ebd087ba2523be48.png"],
-                  iconActive: ["https://b.yzcdn.cn/public_files/6bfb69585388c3840a200726087a9d71.png"],
-                  link: "3",
-                  text: "服务"
+                    icon: ["https://b.yzcdn.cn/public_files/c43a360c499dd012ebd087ba2523be48.png"],
+                    iconActive: ["https://b.yzcdn.cn/public_files/6bfb69585388c3840a200726087a9d71.png"],
+                    link: "3",
+                    text: "服务"
                 },
                 {
-                  icon: ["https://b.yzcdn.cn/public_files/4037fb640218ffcb7c32ee6e4ecd40a4.png"],
-                  iconActive: ["https://b.yzcdn.cn/public_files/4b532299aee643b0fc7b811737a9cbb5.png"],
-                  link: "4",
-                  text: "我的"
+                    icon: ["https://b.yzcdn.cn/public_files/4037fb640218ffcb7c32ee6e4ecd40a4.png"],
+                    iconActive: ["https://b.yzcdn.cn/public_files/4b532299aee643b0fc7b811737a9cbb5.png"],
+                    link: "4",
+                    text: "我的"
                 }
-              ],
+            ],
         },
     },
 ]

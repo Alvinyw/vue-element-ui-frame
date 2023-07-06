@@ -111,6 +111,12 @@ export const componentProperty = [
             text: '',
             fontSize: '14',
             color: '#000',
+            required: false,
+            tipText: '输入格式不正确',
+            type: '2',
+            lenMin: '',
+            lenMax: '',
+            regTest: '',
         },
     },
     {

@@ -55,6 +55,13 @@ export default {
         font-weight: 500;
     }
 
+    .com-wrapper {
+        .el-form {
+            .el-form-item:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
 }
 </style>
 <style scoped lang="less">

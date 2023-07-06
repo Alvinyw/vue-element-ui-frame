@@ -117,6 +117,7 @@ import img_sucai_1 from '@/assets/images/img_sucai_1.jpg';
 import img_sucai_2 from '@/assets/images/img_sucai_2.jpg';
 import img_sucai_3 from '@/assets/images/img_sucai_3.jpg';
 import img_sucai_4 from '@/assets/images/img_sucai_4.jpg';
+import img_sucai_5 from '@/assets/images/img_sucai_5.jpg';
 
 const ZuJian = [
     {
@@ -147,9 +148,9 @@ const ZuJian = [
         ]
     }
 ];
-const SuCai = [img_sucai_1, img_sucai_2, img_sucai_3, img_sucai_4];
+const SuCai = [img_sucai_5, img_sucai_1, img_sucai_2, img_sucai_3, img_sucai_4];
 const MoBan = [
-    img_moban_1, img_moban_5, img_moban_2, img_moban_3, img_moban_4
+    img_moban_1, img_moban_5, img_moban_2, img_moban_4, img_moban_3
 ];
 export default {
     name: "EditIndex",

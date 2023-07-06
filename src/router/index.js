@@ -16,9 +16,15 @@ const router = new Router({
     },
 
     {
+      path: '/preview',
+      name: 'previewIndex',
+      component: () => import( /* webpackChunkName: "preview" */ '@/views/preview/index'),
+    },
+
+    {
       path: '/edit',
       name: 'editIndex',
-      component: () => import( /* webpackChunkName: "home" */ '@/views/edit/index'),
+      component: () => import( /* webpackChunkName: "edit" */ '@/views/edit/index'),
     },
 
     // 成功

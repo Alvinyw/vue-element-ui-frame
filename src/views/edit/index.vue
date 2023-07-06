@@ -2,7 +2,8 @@
     <el-container class="edit-index">
         <el-header class="sec-hd">
             <el-row class="lt"><el-button @click="goBack">返回</el-button></el-row>
-            <el-row class="rt"><el-button @click="onHandleSave">保存</el-button><el-button type="primary"
+            <el-row class="rt"><el-button @click="dialogPreviewCodeVisible = true">预览</el-button><el-button
+                    @click="onHandleSave">保存</el-button><el-button type="primary"
                     @click="dialogTableVisible = true">应用</el-button></el-row>
         </el-header>
         <el-main class="sec-main">
@@ -66,6 +67,9 @@
             </el-row>
             <RightIndex :page-layout="pageLayout" />
         </el-main>
+        <el-dialog class="dig_preCode" title="预览页面" :visible.sync="dialogPreviewCodeVisible">
+            <img :src="previewCode" />
+        </el-dialog>
         <el-dialog title="选择应用系统" :visible.sync="dialogTableVisible">
             <el-table class="dig-tb" ref="multipleTable" :data="appList" tooltip-effect="dark">
                 <el-table-column type="selection" width="55">
@@ -85,10 +89,12 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import pageType from "@/const/pageType";
 import MiddleIndex from "./middle.vue";
 import RightIndex from "./right.vue";
 import { componentType, componentTypeMap, componentProperty } from "@/const/componentType";
 import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
+import previewCode from '@/assets/images/preview_code.png';
 
 const SuCai = [
     {
@@ -129,9 +135,11 @@ export default {
             SuCai,
             componentType,
             bgHeaderNav,
+            previewCode,
             suCaiComInfo: [],
             templateId: new Date().getTime().toString(),
             dialogTableVisible: false,
+            dialogPreviewCodeVisible: false,
             appList: [{
                 Id: 'per',
                 name: '个人手机银行',
@@ -263,7 +271,8 @@ export default {
         },
         async onHandleApply() {
             await this.onHandleSave();
-            this.$api.app.perPageTemplateMappingUse({ templateId: this.templateId, pageId: 'PER_HOME' })
+            const { PER_HOME } = pageType;
+            this.$api.app.perPageTemplateMappingUse({ templateId: this.templateId, pageId: PER_HOME })
                 .then(() => {
                     this.$message({
                         message: '模版应用成功！',
@@ -305,6 +314,18 @@ export default {
     .dig-tb {
         table {
             width: 100% !important;
+        }
+    }
+
+    .dig_preCode {
+        .el-dialog__body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 60%;
+            }
         }
     }
 }

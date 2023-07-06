@@ -30,7 +30,9 @@
             <p class="name">{{ item.templateName }}</p>
             <p class="date">{{ radomTime() }}</p>
             <p class="btn-grp"><el-link type="primary" @click="onHandShiyong(item)">使用</el-link><el-link type="primary"
-                @click="onHandleEdit(item)">编辑</el-link></p>
+                @click="onHandleEdit(item)">编辑</el-link><el-link type="primary"
+                @click="dialogPreviewCodeVisible = true">预览</el-link>
+            </p>
           </el-row>
         </el-row>
       </el-main>
@@ -50,11 +52,15 @@
         <el-button type="primary" @click="onHandleApply">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog class="dig_preCode" title="预览页面" :visible.sync="dialogPreviewCodeVisible">
+      <img :src="previewCode" />
+    </el-dialog>
   </el-container>
 </template>
 
 <script>
 import pageType from "@/const/pageType";
+import previewCode from '@/assets/images/preview_code.png';
 
 export default {
   name: "HomeIndex",
@@ -62,6 +68,8 @@ export default {
     return {
       tableData: [],
       dialogTableVisible: false,
+      dialogPreviewCodeVisible: false,
+      previewCode,
       selectedTmpId: '',
       appList: [{
         Id: 'per',
@@ -108,7 +116,8 @@ export default {
       this.dialogTableVisible = true;
     },
     async onHandleApply() {
-      this.$api.app.perPageTemplateMappingUse({ templateId: this.selectedTmpId, pageId: 'PER_HOME' })
+      const { PER_HOME } = pageType;
+      this.$api.app.perPageTemplateMappingUse({ templateId: this.selectedTmpId, pageId: PER_HOME })
         .then(() => {
           this.$message({
             message: '模版应用成功！',
@@ -138,11 +147,23 @@ export default {
 
 <style lang="less">
 .home-index {
-    .dig-tb {
-        table {
-            width: 100% !important;
-        }
+  .dig-tb {
+    table {
+      width: 100% !important;
     }
+  }
+
+  .dig_preCode {
+    .el-dialog__body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 60%;
+      }
+    }
+  }
 }
 </style>
 <style scoped lang="less">
@@ -159,6 +180,7 @@ export default {
     color: #333;
     background-color: #fff;
     border-right: solid 1px #e6e6e6;
+
     .el-menu {
       border: none;
     }

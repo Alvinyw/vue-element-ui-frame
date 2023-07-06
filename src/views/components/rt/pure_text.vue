@@ -82,7 +82,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
+        ...mapGetters(["templateInfo", "selectedIndex"]),
     },
     watch: {
         obj: {

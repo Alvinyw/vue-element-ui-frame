@@ -63,27 +63,24 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
-        // obj() {
-        //     const { property = {} } = this.options || {};
-        //     return JSON.parse(JSON.stringify(property));
-        // }
+        ...mapGetters(["templateInfo", "selectedIndex"]),
     },
     watch: {
-        obj(newVal, oldVal) {
-
-        }
+        obj: {
+            handler(newVal) {
+                const { pageLayout = {} } = this.templateInfo;
+                pageLayout.forEach((item, index) => {
+                    if (index == this.selectedIndex) item.property = { ...newVal };
+                });
+                this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
+            },
+            deep: true
+        },
     },
     mounted() {
         const { property = {} } = this.options || {};
-        this.obj = JSON.parse(JSON.stringify(property));
-        // console.log('======obj=========', this.obj)
+        this.obj = Object.assign({}, this.obj, { ...property })
     },
-    methods: {
-        handleChange(file, fileList) {
-            // console.log('======file, fileList======', file, fileList)
-        }
-    }
 };
 </script>
 

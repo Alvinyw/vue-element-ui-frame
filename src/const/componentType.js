@@ -102,7 +102,7 @@ export const componentProperty = [
             text: '',
             fontSize: '14',
             color: '#000',
-            link: '',
+            link: '2',
         },
     },
     {

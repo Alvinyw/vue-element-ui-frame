@@ -15,9 +15,9 @@ export function perTemplateQry(data) {
 /**
  * 查询所有模版
  */
- export function perTemplateQryAll(data) {
+ export function perTemplateQryAll(data = {}) {
   return request({
-    url: '/perTemplateQryAll.do',
+    url: '/prmTemplateInfoTableSelectAll',
     method: 'post',
     data,
   })

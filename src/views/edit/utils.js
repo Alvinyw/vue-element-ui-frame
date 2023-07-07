@@ -45,3 +45,12 @@ export const rtComponentBaseMap = {
 export function mapToRtComponents(val = componentType.HEADR_NAV) {
     return rtComponentBaseMap[val];
 }
+
+// blob 转 base64
+export function blobToDataURL(blob, callback) {
+    let a = new FileReader();
+    a.onload = function (e) {
+        callback(e.target.result);
+    }
+    a.readAsDataURL(blob);
+}

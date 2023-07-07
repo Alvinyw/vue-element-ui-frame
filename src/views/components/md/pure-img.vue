@@ -2,16 +2,22 @@
     <div class="pure-img">
         <img v-if="options.property.icon.length > 0"
             :style="{ height: options.property.height, width: options.property.width, 'border-radius': options.property.radius + 'px' }"
-            :src="options.property.icon[0].url" />
+            :src="imgSrc" />
         <div v-else class="empty">
             在右侧编辑区添加图片<br />建议宽度375px
         </div>
     </div>
 </template>
 <script>
+import { blobToDataURL } from '../../edit/utils';
 
 export default {
     name: "PureImg",
+    data() {
+        return {
+            imgSrc: '',
+        }
+    },
     props: {
         options: {
             type: Object,
@@ -20,6 +26,20 @@ export default {
                 property: {},
                 value: ''
             }),
+        },
+    },
+    watch: {
+        options: {
+            handler(newVal) {
+                const { property = {} } = newVal || {};
+                const { icon = [] } = property;
+                const { url = 'blob:#3' } = icon[0];
+                blobToDataURL(url, (val) => {
+                    this.imgSrc = val;
+                    console.log('======this.imgSrc======', this.imgSrc)
+                });
+            },
+            deep: true
         },
     },
 };

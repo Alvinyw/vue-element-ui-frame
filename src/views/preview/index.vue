@@ -1,8 +1,16 @@
 <template>
     <el-container class="preview-index">
-        <div class="head-nav" :style="{ 'background-color': headerNav.bgColor }">
+        <div class="head-nav" :style="{ 'background-color': headerNav.property.bgColor }">
             <img :src="bgHeaderNav" />
-            <h1 :style="{ 'color': headerNav.fontColor }">{{ headerNav.title }}</h1>
+            <h1 :style="{ 'color': headerNav.property.fontColor }">{{ headerNav.property.title }}</h1>
+        </div>
+        <div class="main-ct">
+            <template v-for="(item, index) in componentAry">
+                <div :key="index" class="item">
+                    <component :is="item.component" :options="item.options" :key="index">
+                    </component>
+                </div>
+            </template>
         </div>
         <div class="footer-nav">
             <div v-for="(item, index) in footerNav.property ? footerNav.property.list : {}" :key="index" class="item">
@@ -16,15 +24,22 @@
 <script>
 import pageType from "@/const/pageType";
 import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
+import { componentType, componentTypeMap } from "@/const/componentType";
+import { mapToMdComponents } from "../edit/utils";
 
 export default {
     name: "PreviewIndex",
     data() {
         return {
-            headerNav: {},
-            footerNav: {},
+            headerNav: componentTypeMap.filter(item => item.value == componentType.HEADR_NAV),
+            footerNav: componentTypeMap.filter(item => item.value == componentType.FOOTER_NAV),
             pageLayout: [],
             bgHeaderNav
+        }
+    },
+    computed: {
+        componentAry() {
+            return mapToMdComponents(this.pageLayout);
         }
     },
     mounted() {
@@ -33,7 +48,7 @@ export default {
             .then(res => {
                 const { templateContext = '{}' } = res.data || {};
                 const { headerNav = {}, footerNav = {}, pageLayout = [] } = JSON.parse(templateContext);
-                // console.log('=====templateContext=======', JSON.parse(templateContext))
+                console.log('=====templateContext=======', JSON.parse(templateContext))
                 this.headerNav = headerNav;
                 this.footerNav = footerNav;
                 this.pageLayout = pageLayout;
@@ -61,6 +76,7 @@ export default {
     position: relative;
     width: 100vw;
     height: 100vh;
+    flex-direction: column;
 
     .head-nav {
         display: flex;

@@ -33,8 +33,6 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { componentType, componentTypeMap } from "@/const/componentType";
-
 
 export default {
     name: "FooterNav",
@@ -82,7 +80,8 @@ export default {
 .footer-com {
     .sec {
         margin: 0 0 20px;
-        border-bottom: 1px solid #aaa;
+        padding: 0 0 20px;
+        border-bottom: 1px solid #ddd;
     }
 }
 </style>

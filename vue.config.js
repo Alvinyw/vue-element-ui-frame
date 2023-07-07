@@ -19,8 +19,8 @@ module.exports = {
     proxy: {
       '/api/': {
         // 此处并非和url一致
-        target: 'http://115.150.104.8:8091/pweb', // 测试
-        // target: 'http://192.168.135.193:8082/wallet', // 本地
+        // target: 'http://115.150.104.8:8091/pweb', // 内网
+        target: 'http://kkmeij.natappfree.cc', // 外网
         changeOrigin: true, // 允许跨域
         ws: true,
         pathRewrite: {

@@ -1,7 +1,7 @@
 <template>
     <div class="img">
         <el-carousel :indicator-position="options.property.showArrow ? '' : 'none'" :interval="2000" arrow="always">
-            <el-carousel-item v-for="item in imagesAry" :key="item.uid">
+            <el-carousel-item v-for="item in imagesAry" :key="item.uid" :class="isNoImg ? 'noImg' : ''">
                 <h3 v-if="imagesAry.length < 1">图片{{ item }}</h3>
                 <img v-else :src="item.url" />
             </el-carousel-item>
@@ -25,6 +25,7 @@ export default {
     data() {
         return {
             imagesAry: [],
+            isNoImg: false,
         }
     },
     watch: {
@@ -32,15 +33,17 @@ export default {
             handler(newVal) {
                 const { property = {} } = newVal || {};
                 const { imgs = [] } = property;
-                this.imagesAry = imgs || 3;
+                if (imgs.length < 1) {
+                    this.imagesAry = 3;
+                    this.isNoImg = true;
+                } else {
+                    this.imagesAry = imgs;
+                    this.isNoImg = false;
+                }
+
             },
             deep: true
         },
-    },
-    mounted() {
-        // const { property = {} } = this.options || {};
-        // const { imgs = [] } = property;
-        // this.imagesAry = imgs || 3;
     },
 };
 </script>
@@ -57,8 +60,11 @@ export default {
 .img {
     .el-carousel__item {
         text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        h3 {
+        &.noImg h3 {
             color: #475669;
             font-size: 18px;
             opacity: 0.75;
@@ -68,14 +74,15 @@ export default {
         }
 
         img {
-            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
         }
 
-        &:nth-child(2n) {
+        &.noImg:nth-child(2n) {
             background-color: #99a9bf;
         }
 
-        &:nth-child(2n+1) {
+        &.noImg:nth-child(2n+1) {
             background-color: #d3dce6;
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="pure-img">
-        <img v-if="options.property.icon.length > 0"
+        <img v-if="options.property.icon.length > 0 && imgSrc"
             :style="{ height: options.property.height, width: options.property.width, 'border-radius': options.property.radius + 'px' }"
             :src="imgSrc" />
         <div v-else class="empty">
@@ -9,7 +9,7 @@
     </div>
 </template>
 <script>
-import { blobToDataURL } from '../../edit/utils';
+import { urlToBase64 } from "../../edit/utils";
 
 export default {
     name: "PureImg",
@@ -30,17 +30,26 @@ export default {
     },
     watch: {
         options: {
-            handler(newVal) {
+            async handler(newVal) {
                 const { property = {} } = newVal || {};
                 const { icon = [] } = property;
-                const { url = 'blob:#3' } = icon[0];
-                blobToDataURL(url, (val) => {
-                    this.imgSrc = val;
-                    console.log('======this.imgSrc======', this.imgSrc)
-                });
+                if (icon.length > 0) {
+                    this.imgSrc = await urlToBase64(icon[0].url);
+                } else {
+                    this.imgSrc = '';
+                }
             },
             deep: true
         },
+    },
+    async mounted() {
+        const { property = {} } = this.options || {};
+        const { icon = [] } = property;
+        if (icon.length > 0) {
+            this.imgSrc = await urlToBase64(icon[0].url);
+        } else {
+            this.imgSrc = '';
+        }
     },
 };
 </script>

@@ -205,38 +205,30 @@ export default {
             return headerNav;
         },
     },
-    // watch: {
-    //     templateInfo: {
-    //         handler(val) {
-    //             console.log('====watch-templateInfo========', val);
-    //         },
-    //         deep: true
-    //     },
-    // },
-    // beforeRouteEnter(to, from, next) {
-    //     next(vm => {
-    //         // 通过 `vm` 访问组件实例
-    //         const { templateId = '' } = vm.$router.currentRoute.query;
-    //         if (templateId) {
-    //             vm.$api.app.perTemplateQry({ templateId })
-    //                 .then(res => {
-    //                     const { templateContext = '{}' } = res.data || {};
-    //                     const _tmp = JSON.parse(templateContext);
-    //                     console.log('=======templateContext========', _tmp)
-    //                     const { footerNav } = _tmp;
-    //                     vm.$store.dispatch("app/updateSelectedIndex", - 1);
-    //                     vm.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
-    //                     vm.$store.dispatch("app/updateTemplateInfo", { ..._tmp, footerNav: { ...footerNav, time: new Date().getTime() + 10 } });
-    //                 });
-    //         } else {
-    //             // const headerNav = componentProperty.filter(item => componentType.HEADR_NAV == item.value);
-    //             // const footerNav = componentProperty.filter(item => componentType.FOOTER_NAV == item.value);
-    //             // vm.$store.dispatch("app/updateSelectedIndex", - 1);
-    //             // vm.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
-    //             // vm.$store.dispatch("app/updateTemplateInfo", { headerNav, pageLayout: [], footerNav });
-    //         }
-    //     })
-    // },
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            // 通过 `vm` 访问组件实例
+            const { templateId = '' } = vm.$router.currentRoute.query;
+            if (templateId) {
+                vm.$api.app.perTemplateQry({ templateId })
+                    .then(res => {
+                        const { templateContext = '{}' } = res.data || {};
+                        const _tmp = JSON.parse(templateContext);
+                        // console.log('=======templateContext========', _tmp)
+                        const { footerNav } = _tmp;
+                        vm.$store.dispatch("app/updateSelectedIndex", - 1);
+                        vm.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
+                        vm.$store.dispatch("app/updateTemplateInfo", { ..._tmp, footerNav: { ...footerNav, time: new Date().getTime() + 10 } });
+                    });
+            } else {
+                const headerNav = componentProperty.filter(item => componentType.HEADR_NAV == item.value);
+                const footerNav = componentProperty.filter(item => componentType.FOOTER_NAV == item.value);
+                vm.$store.dispatch("app/updateSelectedIndex", - 1);
+                vm.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
+                vm.$store.dispatch("app/updateTemplateInfo", { headerNav, pageLayout: [], footerNav });
+            }
+        })
+    },
     mounted() {
         this.generateComInfo();
         // console.log('=======router======', this.$router.currentRoute.query)

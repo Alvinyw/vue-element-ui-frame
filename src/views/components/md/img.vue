@@ -32,12 +32,12 @@ export default {
         options: {
             handler(newVal) {
                 const { property = {} } = newVal || {};
-                const { imgs = [] } = property;
-                if (imgs.length < 1) {
+                const { icon = [] } = property;
+                if (icon.length < 1) {
                     this.imagesAry = 3;
                     this.isNoImg = true;
                 } else {
-                    this.imagesAry = imgs;
+                    this.imagesAry = icon;
                     this.isNoImg = false;
                 }
 

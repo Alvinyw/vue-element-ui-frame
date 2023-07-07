@@ -34,27 +34,46 @@ export default {
             headerNav: componentTypeMap.filter(item => item.value == componentType.HEADR_NAV),
             footerNav: componentTypeMap.filter(item => item.value == componentType.FOOTER_NAV),
             pageLayout: [],
-            bgHeaderNav
+            bgHeaderNav,
+            componentAry: [],
         }
     },
-    computed: {
-        componentAry() {
-            return mapToMdComponents(this.pageLayout);
-        }
+    // computed: {
+    //     componentAry() {
+    //         return mapToMdComponents(this.pageLayout);
+    //     }
+    // },
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            const { PER_HOME } = pageType;
+            vm.$api.app.perPageTemplateMappingQry({ pageId: PER_HOME })
+                .then(res => {
+                    const { templateContext = '{}' } = res.data || {};
+                    const { headerNav = {}, footerNav = {}, pageLayout = [] } = JSON.parse(templateContext);
+                    console.log('=====templateContext=======', JSON.parse(templateContext))
+                    vm.headerNav = headerNav;
+                    vm.footerNav = footerNav;
+                    vm.pageLayout = pageLayout;
+                    vm.componentAry = mapToMdComponents(vm.pageLayout);
+                })
+                .catch(() => {
+                });
+        })
     },
     mounted() {
-        const { PER_HOME } = pageType;
-        this.$api.app.perPageTemplateMappingQry({ pageId: PER_HOME })
-            .then(res => {
-                const { templateContext = '{}' } = res.data || {};
-                const { headerNav = {}, footerNav = {}, pageLayout = [] } = JSON.parse(templateContext);
-                console.log('=====templateContext=======', JSON.parse(templateContext))
-                this.headerNav = headerNav;
-                this.footerNav = footerNav;
-                this.pageLayout = pageLayout;
-            })
-            .catch(() => {
-            });
+        // const { PER_HOME } = pageType;
+        // this.$api.app.perPageTemplateMappingQry({ pageId: PER_HOME })
+        //     .then(res => {
+        //         const { templateContext = '{}' } = res.data || {};
+        //         const { headerNav = {}, footerNav = {}, pageLayout = [] } = JSON.parse(templateContext);
+        //         console.log('=====templateContext=======', JSON.parse(templateContext))
+        //         this.headerNav = headerNav;
+        //         this.footerNav = footerNav;
+        //         this.pageLayout = pageLayout;
+        //         this.componentAry = mapToMdComponents(this.pageLayout);
+        //     })
+        //     .catch(() => {
+        //     });
     },
     methods: {
 

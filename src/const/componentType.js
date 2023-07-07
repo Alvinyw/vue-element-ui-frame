@@ -105,7 +105,7 @@ export const componentProperty = [
         property: {
             height: '250',
             showArrow: true,
-            imgs: []
+            icon: []
         },
     },
     {

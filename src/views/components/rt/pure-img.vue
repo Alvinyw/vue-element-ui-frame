@@ -31,7 +31,6 @@
 <script>
 import { mapGetters } from "vuex";
 
-
 export default {
     name: "PureImg",
     props: {
@@ -69,7 +68,7 @@ export default {
         this.obj = Object.assign({}, this.obj, { ...property })
     },
     methods: {
-        handleChange(file, fileList) {
+        async handleChange(file, fileList) {
             if (fileList[0]) { this.obj.icon = [fileList[0]] } else {
                 this.obj.icon = []
             }

@@ -1,6 +1,6 @@
 <template>
     <div class="pure-img">
-        <img v-if="options.property.icon.length"
+        <img v-if="options.property.icon.length > 0"
             :style="{ height: options.property.height, width: options.property.width, 'border-radius': options.property.radius + 'px' }"
             :src="options.property.icon[0].url" />
         <div v-else class="empty">

@@ -6,7 +6,7 @@
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
                         <el-form-item label="图片列表">
-                            <el-upload class="upload-demo" action="#" :on-change="handleChange" :auto-upload="false"
+                            <el-upload class="upload-demo" action="#" :on-remove="handleRemove" :on-change="handleChange" :auto-upload="false"
                                 :limit="10" :file-list="obj.imgs" list-type="picture">
                                 <el-button size="small" type="primary">添加图片</el-button>
                                 <div slot="tip" class="el-upload__tip"></div>
@@ -68,7 +68,12 @@ export default {
     methods: {
         handleChange(file, fileList) {
             if (file) this.obj.imgs.push(file)
-        }
+        },
+        handleRemove(file, fileList) {
+            if (file) {
+                this.obj.imgs = this.obj.imgs.filter(item => item.uid !== file.uid);
+            }
+        },
     }
 };
 </script>

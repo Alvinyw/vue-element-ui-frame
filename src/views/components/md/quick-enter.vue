@@ -1,7 +1,7 @@
 <template>
     <div class="quick-enter">
         <div class="item">
-            <img v-if="options.property.icon.length" :src="options.property.icon[0].url"
+            <img v-if="options.property.icon.length > 0" :src="options.property.icon[0].url"
                 :style="{ 'width': options.property.iconSize + 'px' }" />
             <i v-else class="el-icon-s-home"></i>
             <span :style="{ 'color': options.property.color, 'font-size': options.property.fontSize + 'px' }">{{

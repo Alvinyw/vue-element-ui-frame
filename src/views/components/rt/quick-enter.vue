@@ -6,7 +6,7 @@
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
                         <el-form-item label="图标">
-                            <el-upload class="upload-demo" action="#" :on-change="handleChange" :auto-upload="false"
+                            <el-upload class="upload-demo" action="#" :on-remove="handleChange" :on-change="handleChange" :auto-upload="false"
                                 :limit="1" :file-list="obj.icon" list-type="picture">
                                 <el-button size="small" type="primary">添加图标</el-button>
                                 <div slot="tip" class="el-upload__tip"></div>
@@ -93,7 +93,9 @@ export default {
     },
     methods: {
         handleChange(file, fileList) {
-            if (file) this.obj.icon.push(file)
+            if (fileList[0]) { this.obj.icon = [fileList[0]] } else {
+                this.obj.icon = []
+            }
         }
     }
 };

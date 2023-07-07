@@ -27,10 +27,20 @@ export default {
             imagesAry: [],
         }
     },
+    watch: {
+        options: {
+            handler(newVal) {
+                const { property = {} } = newVal || {};
+                const { imgs = [] } = property;
+                this.imagesAry = imgs || 3;
+            },
+            deep: true
+        },
+    },
     mounted() {
-        const { property = {} } = this.options || {};
-        const { imgs = [] } = property;
-        this.imagesAry = imgs || 3;
+        // const { property = {} } = this.options || {};
+        // const { imgs = [] } = property;
+        // this.imagesAry = imgs || 3;
     },
 };
 </script>

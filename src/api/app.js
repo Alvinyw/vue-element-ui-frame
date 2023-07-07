@@ -4,9 +4,9 @@ import request from '@/utils/request'
  * 模版明细查询
  * @param { templateId } 参数1
  */
-export function perTemplateQry(data) {
+export function perTemplateQry(data = {}) {
   return request({
-    url: '/perTemplateQry.do',
+    url: '/prmTemplateInfoTableSelectById',
     method: 'post',
     data,
   })
@@ -29,9 +29,9 @@ export function perTemplateQry(data) {
  * @param { templateName } 参数1
  * @param { templateContext } 参数1
  */
- export function perTemplateAdd(data) {
+ export function perTemplateAdd(data = {}) {
   return request({
-    url: '/perTemplateAdd.do',
+    url: '/prmTemplateInfoTableInsert',
     method: 'post',
     data,
   })
@@ -41,9 +41,9 @@ export function perTemplateQry(data) {
  * 模版删除
  * @param { templateId } 参数1
  */
- export function perTemplateDel(data) {
+ export function perTemplateDel(data = {}) {
   return request({
-    url: '/perTemplateDel.do',
+    url: '/prmTemplateInfoTableDeleteById',
     method: 'post',
     data,
   })
@@ -55,9 +55,9 @@ export function perTemplateQry(data) {
  * @param { templateName } 参数1
  * @param { templateContext } 参数1
  */
- export function perTemplateUpd(data) {
+ export function perTemplateUpd(data = {}) {
   return request({
-    url: '/perTemplateUpd.do',
+    url: '/prmTemplateInfoTableUpdateById',
     method: 'post',
     data,
   })
@@ -70,9 +70,9 @@ export function perTemplateQry(data) {
  * @param { pageId } 参数1
  * @param { remark } 参数1
  */
- export function perPageTemplateMappingUse(data) {
+ export function perPageTemplateMappingUse(data = {}) {
   return request({
-    url: '/perPageTemplateMappingUse.do',
+    url: '/prmPageTemplateMappingTableUse',
     method: 'post',
     data,
   })
@@ -82,9 +82,9 @@ export function perTemplateQry(data) {
  * 页面模版查询
  * @param { pageId } 参数1
  */
- export function perPageTemplateMappingQry(data) {
+ export function perPageTemplateMappingQry(data = {}) {
   return request({
-    url: '/perPageTemplateMappingQry.do',
+    url: '/prmPageTemplateMappingTableSelectById',
     method: 'post',
     data,
   })

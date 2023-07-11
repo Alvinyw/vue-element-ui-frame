@@ -38,6 +38,11 @@ export default {
     name: "FooterNav",
     data() {
         return {
+            obj: {
+                property: {
+                    list: []
+                }
+            },
             linkAry: [{
                 value: '1',
                 label: '首页'
@@ -55,20 +60,18 @@ export default {
     },
     computed: {
         ...mapGetters(["templateInfo"]),
-        obj() {
-            const { footerNav = {} } = this.templateInfo;
-            return footerNav;
-        },
     },
     watch: {
-        obj(newVal, oldVal) {
-            // console.log('====headerNav=======', oldVal, newVal)
-            if (oldVal == newVal) return;
-            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, footerNav: newVal });
+        obj: {
+            handler(newVal) {
+                this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, footerNav: newVal });
+            },
+            deep: true
         },
     },
     mounted() {
-
+        const { footerNav = {} } = this.templateInfo;
+        this.obj = Object.assign({}, this.obj, { ...footerNav })
     },
     methods: {
 

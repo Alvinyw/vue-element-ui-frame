@@ -211,13 +211,13 @@ export const componentProperty = [
             defaultColor: "#666",
             list: [
                 {
-                    icon: [{ uid: getUUID(), url: "https://b.yzcdn.cn/public_files/d3d6648d247605d7f9a37114ccb398dd.png" }],
+                    icon: [{ url: "https://b.yzcdn.cn/public_files/d3d6648d247605d7f9a37114ccb398dd.png" }],
                     iconActive: [{ uid: getUUID(), url: "https://b.yzcdn.cn/public_files/29fe5014bcb19d4ebffac87a3cf4cb68.png" }],
                     link: "1",
                     text: "首页"
                 },
                 {
-                    icon: [{ uid: getUUID(), url: "https://b.yzcdn.cn/public_files/b26f9134010831fc346b010f09fcf55c.png" }],
+                    icon: [{ url: "https://b.yzcdn.cn/public_files/b26f9134010831fc346b010f09fcf55c.png" }],
                     iconActive: [{ uid: getUUID(), url: "https://b.yzcdn.cn/public_files/8cca4c2c2bbe5744ba78e4a0941410ef.png" }],
                     link: "2",
                     text: "预约"

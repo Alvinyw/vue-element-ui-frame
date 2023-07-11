@@ -33,3 +33,28 @@ export function getUUID() {
   var uuid = s.join("");
   return uuid;
 }
+
+// 根据图片 url 转出 base64
+export function urlToBase64(url, type = 'image/jpeg') {
+  return new Promise((resolve, reject) => {
+      const img = new Image()
+      const canvas = document.createElement('canvas');
+      img.crossOrigin = '*';
+      img.onload = function () {
+          const width = img.width, height = img.height;
+          canvas.width = width;
+          canvas.height = height;
+
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = 'white';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, width, height);
+          const base64 = canvas.toDataURL(type);
+          resolve(base64);
+      };
+      img.onerror = function (err) {
+          reject(new Error(`message:${err}`));
+      };
+      img.src = url;
+  });
+}

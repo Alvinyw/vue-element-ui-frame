@@ -9,7 +9,6 @@
     </div>
 </template>
 <script>
-import { urlToBase64 } from "../../edit/utils";
 
 export default {
     name: "PureImg",
@@ -34,10 +33,11 @@ export default {
                 const { property = {} } = newVal || {};
                 const { icon = [] } = property;
                 if (icon.length > 0) {
-                    this.imgSrc = await urlToBase64(icon[0].url);
+                    this.imgSrc = await this.$lib.urlToBase64(icon[0].url);
                 } else {
                     this.imgSrc = '';
                 }
+                console.log('========this.imgSrc-2=======', this.imgSrc)
             },
             deep: true
         },
@@ -46,10 +46,11 @@ export default {
         const { property = {} } = this.options || {};
         const { icon = [] } = property;
         if (icon.length > 0) {
-            this.imgSrc = await urlToBase64(icon[0].url);
+            this.imgSrc = await this.$lib.urlToBase64(icon[0].url);
         } else {
             this.imgSrc = '';
         }
+        console.log('========this.imgSrc-1=======', this.imgSrc)
     },
 };
 </script>

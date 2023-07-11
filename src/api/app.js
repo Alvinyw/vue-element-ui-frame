@@ -6,7 +6,7 @@ import request from '@/utils/request'
  */
 export function perTemplateQry(data = {}) {
   return request({
-    url: '/prmTemplateInfoTableSelectById',
+    url: '/perTemplateQry.do',
     method: 'post',
     data,
   })
@@ -17,7 +17,7 @@ export function perTemplateQry(data = {}) {
  */
  export function perTemplateQryAll(data = {}) {
   return request({
-    url: '/prmTemplateInfoTableSelectAll',
+    url: '/perTemplateQryAll.do',
     method: 'post',
     data,
   })
@@ -31,7 +31,7 @@ export function perTemplateQry(data = {}) {
  */
  export function perTemplateAdd(data = {}) {
   return request({
-    url: '/prmTemplateInfoTableInsert',
+    url: '/perTemplateAdd.do',
     method: 'post',
     data,
   })
@@ -43,7 +43,7 @@ export function perTemplateQry(data = {}) {
  */
  export function perTemplateDel(data = {}) {
   return request({
-    url: '/prmTemplateInfoTableDeleteById',
+    url: '/perTemplateDel.do',
     method: 'post',
     data,
   })
@@ -57,7 +57,7 @@ export function perTemplateQry(data = {}) {
  */
  export function perTemplateUpd(data = {}) {
   return request({
-    url: '/prmTemplateInfoTableUpdateById',
+    url: '/perTemplateUpd.do',
     method: 'post',
     data,
   })
@@ -72,7 +72,7 @@ export function perTemplateQry(data = {}) {
  */
  export function perPageTemplateMappingUse(data = {}) {
   return request({
-    url: '/prmPageTemplateMappingTableUse',
+    url: '/perPageTemplateMappingUse.do',
     method: 'post',
     data,
   })
@@ -84,7 +84,7 @@ export function perTemplateQry(data = {}) {
  */
  export function perPageTemplateMappingQry(data = {}) {
   return request({
-    url: '/prmPageTemplateMappingTableSelectById',
+    url: '/perPageTemplateMappingQry.do',
     method: 'post',
     data,
   })

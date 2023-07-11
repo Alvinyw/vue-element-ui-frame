@@ -13,32 +13,20 @@
 <script>
 import { mapGetters } from "vuex";
 import { mapToMdComponents } from "./utils";
-import { componentType, componentTypeMap } from "@/const/componentType";
+import { componentType } from "@/const/componentType";
 
 export default {
     name: "MiddleIndex",
     components: {},
-    props: {
-        pageLayout: {
-            type: Array,
-            required: false,
-            default: () => ([]),
-        },
-    },
     data() {
         return {
         }
     },
     computed: {
         ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
-        // pageLayout() {
-        //     const { pageLayout = {} } = this.templateInfo;
-        //     return pageLayout;
-        // },
         componentAry() {
-            // const { pageLayout = {} } = this.templateInfo;
-            const _c = mapToMdComponents(this.pageLayout);
-            // console.log('======componentAry-1=========', _c)
+            const { pageLayout = {} } = this.templateInfo;
+            const _c = mapToMdComponents(pageLayout);
             return _c;
         }
     },

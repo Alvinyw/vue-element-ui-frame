@@ -7,18 +7,10 @@
 import { mapGetters } from "vuex";
 import { mapToRtComponents } from "./utils";
 import HeaderNav from "../components/rt/header-nav.vue";
-import { componentType, componentTypeMap } from "@/const/componentType";
 
 export default {
     name: "RightIndex",
     components: { HeaderNav },
-    props: {
-        pageLayout: {
-            type: Array,
-            required: false,
-            default: () => ([]),
-        },
-    },
     data() {
         return {
             currentCom: HeaderNav,
@@ -27,8 +19,8 @@ export default {
     computed: {
         ...mapGetters(["templateInfo", "currentComType", "selectedIndex"]),
         currentObj() {
-            // const { pageLayout = {} } = this.templateInfo;
-            const _obj = this.pageLayout.filter((item, index) => index == this.selectedIndex)[0] || {};
+            const { pageLayout = {} } = this.templateInfo;
+            const _obj = pageLayout.filter((item, index) => index == this.selectedIndex)[0] || {};
             return _obj;
         }
     },

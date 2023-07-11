@@ -66,7 +66,7 @@
                         <img :src="bgHeaderNav" />
                         <h1 :style="{ 'color': headerNav.property.fontColor }">{{ headerNav.property.title }}</h1>
                     </div>
-                    <MiddleIndex :page-layout="pageLayout" />
+                    <MiddleIndex />
                     <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
                         @click="onAddZuJian(componentType.FOOTER_NAV, false)">
                         <div v-for="(item, index) in footerNav.property.list" :key="index" class="item">
@@ -76,7 +76,7 @@
                     </div>
                 </el-row>
             </el-row>
-            <RightIndex :page-layout="pageLayout" />
+            <RightIndex />
         </el-main>
         <el-dialog class="dig_preCode" title="预览页面" :visible.sync="dialogPreviewCodeVisible">
             <img :src="previewCode" />

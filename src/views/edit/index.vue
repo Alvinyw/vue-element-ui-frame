@@ -70,7 +70,7 @@
                     <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
                         @click="onAddZuJian(componentType.FOOTER_NAV, false)">
                         <div v-for="(item, index) in footerNav.property.list" :key="index" class="item">
-                            <img :src="item.icon[0].url" />
+                            <img v-if="item.icon[0]" :src="item.icon[0].url" />
                             <span class="nm">{{ item.text }}</span>
                         </div>
                     </div>

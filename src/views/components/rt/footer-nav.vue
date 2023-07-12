@@ -7,11 +7,13 @@
                     <el-form label-position="left" :model="obj" label-width="100px">
                         <div class="sec" v-for="(item, index) in obj.property.list" :key="index">
                             <el-form-item label="图标">
-                                <el-upload class="upload-demo" action="#" :auto-upload="false" :limit="1"
-                                    :file-list="item.icon" list-type="picture">
-                                    <el-button size="small" type="primary">添加图标</el-button>
-                                    <div slot="tip" class="el-upload__tip"></div>
-                                </el-upload>
+                                <div @click="handleClick(index)">
+                                    <el-upload class="upload-demo" action="#" :on-remove="handleRemove"
+                                        :on-change="handleAdd" :auto-upload="false" :limit="1" :file-list="item.icon"
+                                        list-type="picture">
+                                        <el-button size="small" type="primary">添加图标</el-button>
+                                    </el-upload>
+                                </div>
                             </el-form-item>
                             <el-form-item label="文本">
                                 <el-input v-model="item.text"></el-input>
@@ -43,6 +45,7 @@ export default {
                     list: []
                 }
             },
+            currentIndex: '', // 当前操作项
             linkAry: [{
                 value: '1',
                 label: '首页'
@@ -74,7 +77,22 @@ export default {
         this.obj = Object.assign({}, this.obj, { ...footerNav })
     },
     methods: {
-
+        handleClick(idx) {
+            this.currentIndex = idx;
+        },
+        async handleAdd(file, fileList) {
+            // console.log('==========handleAdd===========', file, fileList, this.currentIndex)
+            if (file) {
+                const _url = await this.$lib.urlToBase64(file.url);
+                this.obj.property.list[this.currentIndex].icon = [{...file, url: _url}]
+            }
+        },
+        handleRemove(file, fileList) {
+            setTimeout(() => {
+                // console.log('==========handleRemove===========', file, fileList, this.currentIndex)
+                this.obj.property.list[this.currentIndex].icon = [];
+            }, 10)
+        },
     }
 };
 </script>

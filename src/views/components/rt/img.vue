@@ -6,7 +6,7 @@
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
                         <el-form-item label="图片列表">
-                            <el-upload class="upload-demo" action="#" :on-remove="handleRemove" :on-change="handleChange" :auto-upload="false"
+                            <el-upload class="upload-demo" action="#" :on-remove="handleRemove" :on-change="handleAdd" :auto-upload="false"
                                 :limit="10" :file-list="obj.icon" list-type="picture">
                                 <el-button size="small" type="primary">添加图片</el-button>
                                 <div slot="tip" class="el-upload__tip"></div>
@@ -66,8 +66,11 @@ export default {
         this.obj = Object.assign({}, this.obj, { ...property })
     },
     methods: {
-        handleChange(file, fileList) {
-            if (file) this.obj.icon.push(file)
+        async handleAdd(file, fileList) {
+            if (file) {
+                const _url = await this.$lib.urlToBase64(file.url);
+                this.obj.icon.push({ ...file, url: _url })
+            }
         },
         handleRemove(file, fileList) {
             if (file) {

@@ -24,15 +24,15 @@
 <script>
 import pageType from "@/const/pageType";
 import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
-import { componentType, componentTypeMap } from "@/const/componentType";
+import { componentType, componentProperty } from "@/const/componentType";
 import { mapToMdComponents } from "../edit/utils";
 
 export default {
     name: "PreviewIndex",
     data() {
         return {
-            headerNav: componentTypeMap.filter(item => item.value == componentType.HEADR_NAV),
-            footerNav: componentTypeMap.filter(item => item.value == componentType.FOOTER_NAV),
+            headerNav: componentProperty.filter(item => item.value == componentType.HEADR_NAV)[0],
+            footerNav: componentProperty.filter(item => item.value == componentType.FOOTER_NAV)[0],
             pageLayout: [],
             bgHeaderNav,
             componentAry: [],

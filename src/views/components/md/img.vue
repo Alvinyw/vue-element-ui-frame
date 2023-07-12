@@ -31,20 +31,28 @@ export default {
     watch: {
         options: {
             handler(newVal) {
-                const { property = {} } = newVal || {};
-                const { icon = [] } = property;
-                if (icon.length < 1) {
-                    this.imagesAry = 3;
-                    this.isNoImg = true;
-                } else {
-                    this.imagesAry = icon;
-                    this.isNoImg = false;
-                }
+                this.formateIcon(newVal);
 
             },
             deep: true
         },
     },
+    mounted() {
+        this.formateIcon(this.options);
+    },
+    methods: {
+        formateIcon(op) {
+            const { property = {} } = op || {};
+            const { icon = [] } = property;
+            if (icon.length < 1) {
+                this.imagesAry = 3;
+                this.isNoImg = true;
+            } else {
+                this.imagesAry = icon;
+                this.isNoImg = false;
+            }
+        }
+    }
 };
 </script>
 

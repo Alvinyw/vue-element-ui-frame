@@ -1,8 +1,8 @@
 <template>
     <div class="pure-img">
-        <img v-if="options.property.icon.length > 0 && imgSrc"
+        <img v-if="options.property.icon.length > 0"
             :style="{ height: options.property.height, width: options.property.width, 'border-radius': options.property.radius + 'px' }"
-            :src="imgSrc" />
+            :src="options.property.icon[0].url" />
         <div v-else class="empty">
             在右侧编辑区添加图片<br />建议宽度375px
         </div>
@@ -12,11 +12,6 @@
 
 export default {
     name: "PureImg",
-    data() {
-        return {
-            imgSrc: '',
-        }
-    },
     props: {
         options: {
             type: Object,
@@ -26,31 +21,6 @@ export default {
                 value: ''
             }),
         },
-    },
-    watch: {
-        options: {
-            async handler(newVal) {
-                const { property = {} } = newVal || {};
-                const { icon = [] } = property;
-                if (icon.length > 0) {
-                    this.imgSrc = await this.$lib.urlToBase64(icon[0].url);
-                } else {
-                    this.imgSrc = '';
-                }
-                console.log('========this.imgSrc-2=======', this.imgSrc)
-            },
-            deep: true
-        },
-    },
-    async mounted() {
-        const { property = {} } = this.options || {};
-        const { icon = [] } = property;
-        if (icon.length > 0) {
-            this.imgSrc = await this.$lib.urlToBase64(icon[0].url);
-        } else {
-            this.imgSrc = '';
-        }
-        console.log('========this.imgSrc-1=======', this.imgSrc)
     },
 };
 </script>

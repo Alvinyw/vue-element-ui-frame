@@ -69,7 +69,10 @@ export default {
     },
     methods: {
         async handleChange(file, fileList) {
-            if (fileList[0]) { this.obj.icon = [fileList[0]] } else {
+            if (fileList[0]) {
+                const _url = await this.$lib.urlToBase64(fileList[0].url);
+                this.obj.icon = [{ ...fileList[0], url: _url }]
+            } else {
                 this.obj.icon = []
             }
         }

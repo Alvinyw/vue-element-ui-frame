@@ -3,9 +3,9 @@
         <div class="item">
             <img v-if="options.property.icon.length > 0" :src="options.property.icon[0].url"
                 :style="{ 'width': options.property.iconSize + 'px' }" />
-            <i v-else class="el-icon-s-home"></i>
+            <!-- <i v-else class="el-icon-s-home"></i> -->
             <span :style="{ 'color': options.property.color, 'font-size': options.property.fontSize + 'px' }">{{
-                options.property.text || '快捷入口' }}</span>
+                options.property.text }}</span>
         </div>
     </div>
 </template>

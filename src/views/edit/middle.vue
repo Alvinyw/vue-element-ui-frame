@@ -58,6 +58,7 @@ export default {
     overflow: scroll;
     .com-item {
         position: relative;
+        // min-height: 30px;
         cursor: pointer;
         border: 2px solid transparent;
 

@@ -6,7 +6,7 @@
                 <el-row class="com-wrapper">
                     <el-form label-position="left" :model="obj" label-width="100px">
                         <el-form-item label="图标">
-                            <el-upload class="upload-demo" action="#" :on-remove="handleChange" :on-change="handleChange"
+                            <el-upload class="upload-demo" action="#" :on-remove="handleRemove" :on-change="handleChange"
                                 :auto-upload="false" :limit="1" :file-list="obj.icon" list-type="picture">
                                 <el-button size="small" type="primary">添加图标</el-button>
                                 <div slot="tip" class="el-upload__tip"></div>
@@ -72,10 +72,13 @@ export default {
             if (file) {
                 const _url = await this.$lib.urlToBase64(file.url);
                 this.obj.icon = [{ ...file, url: _url }]
-            } else {
-                this.obj.icon = []
             }
-        }
+        },
+        handleRemove(file, fileList) {
+            if (file) {
+                this.obj.icon = this.obj.icon.filter(item => item.uid !== file.uid);
+            }
+        },
     }
 };
 </script>

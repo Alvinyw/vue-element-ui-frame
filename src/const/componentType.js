@@ -157,7 +157,7 @@ export const componentProperty = [
     {
         value: componentType.QUICK_ENTER,
         property: {
-            icon: [],
+            icon: [{ url: 'https://b.yzcdn.cn/public_files/d3d6648d247605d7f9a37114ccb398dd.png'}],
             iconSize: '30',
             text: '快捷入口',
             link: '2',

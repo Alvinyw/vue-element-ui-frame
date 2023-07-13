@@ -58,24 +58,7 @@
                     </el-row>
                 </el-row>
             </el-row>
-            <el-row class="md">
-                <el-row class="iphone-view">
-                    <div class="head-nav" :class="currentComType == componentType.HEADR_NAV ? 'actived' : ''"
-                        :style="{ 'background-color': headerNav.property.bgColor }"
-                        @click="onAddZuJian(componentType.HEADR_NAV, false)">
-                        <img :src="bgHeaderNav" />
-                        <h1 :style="{ 'color': headerNav.property.fontColor }">{{ headerNav.property.title }}</h1>
-                    </div>
-                    <MiddleIndex />
-                    <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
-                        @click="onAddZuJian(componentType.FOOTER_NAV, false)">
-                        <div v-for="(item, index) in footerNav.property.list" :key="index" class="item">
-                            <img v-if="item.icon[0]" :src="item.icon[0].url" />
-                            <span class="nm">{{ item.text }}</span>
-                        </div>
-                    </div>
-                </el-row>
-            </el-row>
+            <MiddleIndex />
             <RightIndex />
         </el-main>
         <el-dialog class="dig_preCode" title="预览页面" :visible.sync="dialogPreviewCodeVisible">
@@ -104,7 +87,6 @@ import pageType from "@/const/pageType";
 import MiddleIndex from "./middle.vue";
 import RightIndex from "./right.vue";
 import { componentType, componentTypeMap, componentProperty } from "@/const/componentType";
-import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
 import previewCode from '@/assets/images/preview_code.png';
 // 模版
 import img_moban_1 from '@/assets/images/img_moban_1.jpg';
@@ -164,7 +146,6 @@ export default {
             MoBan,
             SuCai,
             componentType,
-            bgHeaderNav,
             previewCode,
             zuJianComInfo: [],
             templateId: new Date().getTime().toString(),
@@ -192,10 +173,6 @@ export default {
     },
     computed: {
         ...mapGetters(["templateInfo", "currentComType"]),
-        footerNav() {
-            const { footerNav = {} } = this.templateInfo;
-            return footerNav;
-        },
         pageLayout() {
             const { pageLayout = {} } = this.templateInfo;
             return pageLayout;
@@ -215,18 +192,15 @@ export default {
                         const { templateContext = '{}' } = res.data || {};
                         const _tmp = JSON.parse(templateContext);
                         // console.log('=======templateContext========', _tmp)
-                        const { footerNav } = _tmp;
-                        vm.$store.dispatch("app/updateSelectedIndex", - 1);
-                        vm.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
-                        vm.$store.dispatch("app/updateTemplateInfo", { ..._tmp, footerNav: { ...footerNav, time: new Date().getTime() + 10 } });
+                        vm.$store.dispatch("app/updateTemplateInfo", { ..._tmp });
                     });
             } else {
                 const headerNav = componentProperty.filter(item => componentType.HEADR_NAV == item.value)[0];
                 const footerNav = componentProperty.filter(item => componentType.FOOTER_NAV == item.value)[0];
-                vm.$store.dispatch("app/updateSelectedIndex", - 1);
-                vm.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
                 vm.$store.dispatch("app/updateTemplateInfo", { headerNav, pageLayout: [], footerNav });
             }
+            vm.$store.dispatch("app/updateSelectedIndex", - 1);
+            vm.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
         })
     },
     mounted() {
@@ -499,91 +473,6 @@ export default {
                             font-size: 14px;
                             line-height: 24px;
                             border-top: 1px solid #aaa;
-                        }
-                    }
-                }
-            }
-        }
-
-        .md {
-            box-sizing: border-box;
-            padding: 45px 0 20px;
-            overflow-y: auto;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 320px;
-            right: 320px;
-            background: #ebedf0;
-            display: flex;
-            justify-content: center;
-
-            .iphone-view {
-                position: relative;
-                width: 375px;
-                height: 644px;
-                background-color: #f5f5f5;
-                box-shadow: 0 2px 4px 4px #ccc;
-
-                .head-nav {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
-                    position: relative;
-                    width: 100%;
-                    height: 64px;
-                    box-sizing: border-box;
-                    background-color: #fff;
-                    transition: all 0.3s ease-in-out;
-                    border: 2px solid transparent;
-
-                    &.actived {
-                        border: 2px solid #7545F3
-                    }
-
-                    img {
-                        width: 100%;
-                    }
-
-                    h1 {
-                        margin: 5px 0 0;
-                        padding: 0;
-                        font-size: 16px;
-                        font-weight: bold;
-                        text-align: center;
-                    }
-                }
-
-                .footer-nav {
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 50px;
-                    display: flex;
-                    justify-content: space-around;
-                    background-color: #fff;
-                    border: 2px solid transparent;
-
-                    &.actived {
-                        border: 2px solid #7545F3
-                    }
-
-                    .item {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        flex-direction: column;
-                        font-size: 12px;
-
-                        img {
-                            width: 20px;
-                            height: 20px;
-                        }
-
-                        .nm {
-                            margin: 3px 0 0;
                         }
                     }
                 }

@@ -3,11 +3,11 @@
         <el-row class="iphone-view">
             <div class="head-nav" :class="currentComType == componentType.HEADR_NAV ? 'actived' : ''"
                 :style="{ 'background-color': headerNav.property.bgColor }"
-                @click="onAddZuJian(componentType.HEADR_NAV, false)">
+                @click="onComponentChange({ options: { value: componentType.HEADR_NAV } }, -1)">
                 <img :src="bgHeaderNav" />
                 <h1 :style="{ 'color': headerNav.property.fontColor }">{{ headerNav.property.title }}</h1>
             </div>
-            <el-row class="md-main">
+            <el-row class="main-ct">
                 <template v-for="(item, index) in componentAry">
                     <div @click="onComponentChange(item, index)" :key="index"
                         :class="Number(selectedIndex) == Number(index) ? 'actived' : ''" class="com-item">
@@ -18,7 +18,7 @@
                 </template>
             </el-row>
             <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
-                @click="onAddZuJian(componentType.FOOTER_NAV, false)">
+                @click="onComponentChange({ options: { value: componentType.FOOTER_NAV } }, -1)">
                 <div v-for="(item, index) in footerNav.property.list" :key="index" class="item">
                     <img v-if="item.icon[0]" :src="item.icon[0].url" />
                     <span class="nm">{{ item.text }}</span>
@@ -30,7 +30,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { mapToMdComponents } from "./utils";
-import { componentType, componentProperty } from "@/const/componentType";
+import { componentType } from "@/const/componentType";
 import bgHeaderNav from '@/assets/images/bg_headerNav.svg';
 
 export default {
@@ -76,23 +76,6 @@ export default {
             this.$store.dispatch("app/updateSelectedIndex", - 1);
             this.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
         },
-        onAddZuJian(val = componentType.HEADR_NAV, update = true) {
-            this.$store.dispatch("app/updateCurrentComType", val);
-            if (!update) {
-                this.$store.dispatch("app/updateSelectedIndex", -1);
-                return;
-            }
-            const { pageLayout = [] } = this.templateInfo;
-            const _obj = componentProperty.filter(item => item.value == val)[0] || {};
-            // console.log('======_obj43343========', _obj)
-            const { value = '', property = {} } = _obj;
-            pageLayout.push({
-                value,
-                property: { ...property }
-            });
-            this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
-            this.$store.dispatch("app/updateSelectedIndex", pageLayout.length - 1);
-        }
     }
 };
 </script>
@@ -148,7 +131,7 @@ export default {
             }
         }
 
-        .md-main {
+        .main-ct t {
             height: 530px;
             overflow: scroll;
 

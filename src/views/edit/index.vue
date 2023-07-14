@@ -3,49 +3,33 @@
         <el-header class="sec-hd">
             <el-row class="lt"><el-button @click="goBack">返回</el-button></el-row>
             <el-row class="rt"><el-button @click="dialogPreviewCodeVisible = true">预览</el-button><el-button
-                    @click="onHandleSave">保存</el-button><el-button type="primary"
+                    @click="onTemplateSave">保存</el-button><el-button type="primary"
                     @click="dialogTableVisible = true">应用</el-button></el-row>
         </el-header>
         <el-main class="sec-main">
             <el-row class="lt">
                 <ul class="tabs">
-                    <li label="组件" :class="activtedIndex == '1' ? 'activted' : ''" @click="onHandleTabClick('1')">组件</li>
-                    <li label="素材" :class="activtedIndex == '2' ? 'activted' : ''" @click="onHandleTabClick('2')">素材</li>
-                    <li label="模版" :class="activtedIndex == '3' ? 'activted' : ''" @click="onHandleTabClick('3')">模版</li>
+                    <li v-for="(item, index) in TabList" :label="item.value"
+                        :class="activtedIndex == index ? 'activted' : ''" @click="onTabClick(index)" :key="index">{{
+                            item.value }}
+                    </li>
                 </ul>
                 <el-row class="content-wrapper">
-                    <el-row v-if="activtedIndex == '1'" class="zuJian">
-                        <el-collapse v-model="activeNames">
-                            <el-collapse-item :title="ZuJian[0].title" name="1">
+                    <el-row v-if="activtedIndex == 0" class="zuJian">
+                        <el-collapse :value="[0, 1, 2]">
+                            <el-collapse-item v-for="(item, index) in ZuJianList" :title="item.title" :key="index"
+                                :name="index">
                                 <el-row class="item-wrapper">
-                                    <div v-for="(item, index) in zuJianComInfo[0]" :key="index" class="item"
-                                        @click="onAddZuJian(item.value)">
-                                        <i :class="item.icon"></i>
-                                        <span class="nm">{{ item.name }}</span>
-                                    </div>
-                                </el-row>
-                            </el-collapse-item>
-                            <el-collapse-item :title="ZuJian[1].title" name="2">
-                                <el-row class="item-wrapper">
-                                    <div v-for="(item, index) in zuJianComInfo[1]" :key="index" class="item"
-                                        @click="onAddZuJian(item.value)">
-                                        <i :class="item.icon"></i>
-                                        <span class="nm">{{ item.name }}</span>
-                                    </div>
-                                </el-row>
-                            </el-collapse-item>
-                            <el-collapse-item :title="ZuJian[2].title" name="3">
-                                <el-row class="item-wrapper">
-                                    <div v-for="(item, index) in zuJianComInfo[2]" :key="index" class="item"
-                                        @click="onAddZuJian(item.value)">
-                                        <i :class="item.icon"></i>
-                                        <span class="nm">{{ item.name }}</span>
+                                    <div v-for="(obj, index) in item.typeMap" :key="index" class="item"
+                                        @click="onZuJianAdd(obj.value)">
+                                        <i :class="obj.icon"></i>
+                                        <span class="nm">{{ obj.name }}</span>
                                     </div>
                                 </el-row>
                             </el-collapse-item>
                         </el-collapse>
                     </el-row>
-                    <el-row v-else-if="activtedIndex == '2'" class="suCai">
+                    <el-row v-else-if="activtedIndex == 1" class="suCai">
                         <div v-for="(item, index) in SuCai" :key="index" class="item">
                             <img :src="item" />
                         </div>
@@ -76,7 +60,7 @@
             </el-table>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogTableVisible = false">取 消</el-button>
-                <el-button type="primary" @click="onHandleApply">确 定</el-button>
+                <el-button type="primary" @click="onTemplateApply">确 定</el-button>
             </span>
         </el-dialog>
     </el-container>
@@ -101,10 +85,25 @@ import img_sucai_3 from '@/assets/images/img_sucai_3.jpg';
 import img_sucai_4 from '@/assets/images/img_sucai_4.jpg';
 import img_sucai_5 from '@/assets/images/img_sucai_5.jpg';
 
+const TabList = [
+    {
+        key: 'ZuJian',
+        value: '组件',
+    },
+    {
+        key: 'SuCai',
+        value: '素材',
+    },
+    {
+        key: 'MoBan',
+        value: '模版',
+    }
+];
+
 const ZuJian = [
     {
         title: '基础组件',
-        list: [
+        type: [
             componentType.PURE_TEXT,
             componentType.RICH_TEXT,
             componentType.TEXT_NAV,
@@ -117,7 +116,7 @@ const ZuJian = [
     },
     {
         title: '业务组件',
-        list: [
+        type: [
             componentType.LICAI,
             componentType.CUNKUAN,
             componentType.DAIKUAN,
@@ -125,7 +124,7 @@ const ZuJian = [
     },
     {
         title: '系统组件',
-        list: [
+        type: [
             componentType.SOUSUO,
             componentType.WANGDIAN,
         ]
@@ -140,14 +139,14 @@ export default {
     components: { MiddleIndex, RightIndex },
     data() {
         return {
-            activtedIndex: '1',
-            activeNames: ['1', '2', '3'],
+            activtedIndex: 0,
+            TabList,
             ZuJian,
             MoBan,
             SuCai,
             componentType,
             previewCode,
-            zuJianComInfo: [],
+            ZuJianList: [],
             templateId: new Date().getTime().toString(),
             dialogTableVisible: false,
             dialogPreviewCodeVisible: false,
@@ -204,7 +203,7 @@ export default {
         })
     },
     mounted() {
-        this.generateComInfo();
+        this.uodateZuJianList();
         // console.log('=======router======', this.$router.currentRoute.query)
     },
     methods: {
@@ -219,19 +218,19 @@ export default {
             }
             this.templateId = new Date().getTime().toString();
         },
-        onHandleTabClick(index = '1') {
+        onTabClick(index = '1') {
             this.activtedIndex = index;
         },
-        generateComInfo() {
+        uodateZuJianList() {
             ZuJian.forEach(item => {
                 let _t = [];
-                item.list.forEach(a => {
+                item.type.forEach(a => {
                     _t.push(componentTypeMap.filter(b => b.value == a)[0])
                 })
-                this.zuJianComInfo.push(_t)
+                this.ZuJianList.push({ ...item, typeMap: _t })
             })
         },
-        async onHandleSave() {
+        async onTemplateSave() {
             const { title = '首页' } = this.headerNav.property;
             this.updateTemplateId();
             const { templateId = '' } = this.$router.currentRoute.query;
@@ -265,8 +264,8 @@ export default {
                     });
                 });
         },
-        async onHandleApply() {
-            await this.onHandleSave();
+        async onTemplateApply() {
+            await this.onTemplateSave();
             const { PER_HOME } = pageType;
             this.$api.app.perPageTemplateMappingUse({ templateId: this.templateId, pageId: PER_HOME })
                 .then(() => {
@@ -284,15 +283,9 @@ export default {
                     this.dialogTableVisible = false;
                 });
         },
-        onAddZuJian(val = componentType.HEADR_NAV, update = true) {
-            this.$store.dispatch("app/updateCurrentComType", val);
-            if (!update) {
-                this.$store.dispatch("app/updateSelectedIndex", -1);
-                return;
-            }
+        onZuJianAdd(val = componentType.HEADR_NAV) {
             const { pageLayout = [] } = this.templateInfo;
             const _obj = componentProperty.filter(item => item.value == val)[0] || {};
-            // console.log('======_obj43343========', _obj)
             const { value = '', property = {} } = _obj;
             pageLayout.push({
                 value,
@@ -300,6 +293,7 @@ export default {
             });
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
             this.$store.dispatch("app/updateSelectedIndex", pageLayout.length - 1);
+            this.$store.dispatch("app/updateCurrentComType", val);
         }
     }
 };

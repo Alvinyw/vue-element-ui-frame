@@ -29,12 +29,6 @@ export default {
             this.currentCom = mapToRtComponents(val);
         }
     },
-    mounted() {
-
-    },
-    methods: {
-
-    }
 };
 </script>
 

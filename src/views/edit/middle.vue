@@ -131,7 +131,7 @@ export default {
             }
         }
 
-        .main-ct t {
+        .main-ct {
             height: 530px;
             overflow: scroll;
 

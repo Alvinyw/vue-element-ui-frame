@@ -23,13 +23,12 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { componentType, componentTypeMap } from "@/const/componentType";
-
 
 export default {
     name: "HeaderNav",
     data() {
         return {
+            // obj: { property: {} },
         }
     },
     computed: {
@@ -39,19 +38,26 @@ export default {
             return headerNav;
         },
     },
-    watch: {
-        // obj(newVal, oldVal) {
-        //     // console.log('====headerNav=======', oldVal, newVal)
-        //     if (JSON.stringify(oldVal) == JSON.stringify(newVal)) return;
-        //     this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, headerNav: newVal });
-        // },
-    },
-    mounted() {
-
-    },
-    methods: {
-
-    }
+    // watch: {
+    //     // obj(newVal, oldVal) {
+    //     //     // console.log('====headerNav=======', oldVal, newVal)
+    //     //     if (JSON.stringify(oldVal) == JSON.stringify(newVal)) return;
+    //     //     this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, headerNav: newVal });
+    //     // },
+    // },
+    // watch: {
+    //     obj: {
+    //         handler(newVal) {
+    //             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, headerNav: newVal });
+    //         },
+    //         deep: true
+    //     },
+    // },
+    // mounted() {
+    //     const { headerNav = {} } = this.templateInfo;
+    //     this.obj = Object.assign({}, this.obj, { ...headerNav })
+    //     console.log('========headerNav-2========', this.obj)
+    // }
 };
 </script>
 

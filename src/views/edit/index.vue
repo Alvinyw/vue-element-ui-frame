@@ -45,7 +45,7 @@
             <MiddleIndex />
             <RightIndex />
         </el-main>
-        <el-dialog class="dig_preCode" title="预览页面" :visible.sync="dialogPreviewCodeVisible">
+        <el-dialog class="dig-preCode" title="预览页面" :visible.sync="dialogPreviewCodeVisible">
             <img :src="previewCode" />
         </el-dialog>
         <el-dialog title="选择应用系统" :visible.sync="dialogTableVisible">
@@ -194,9 +194,9 @@ export default {
                         vm.$store.dispatch("app/updateTemplateInfo", { ..._tmp });
                     });
             } else {
-                const headerNav = componentProperty.filter(item => componentType.HEADR_NAV == item.value)[0];
-                const footerNav = componentProperty.filter(item => componentType.FOOTER_NAV == item.value)[0];
-                vm.$store.dispatch("app/updateTemplateInfo", { headerNav, pageLayout: [], footerNav });
+                const _headerNav = componentProperty.filter(item => componentType.HEADR_NAV == item.value)[0];
+                const _footerNav = componentProperty.filter(item => componentType.FOOTER_NAV == item.value)[0];
+                vm.$store.dispatch("app/updateTemplateInfo", { headerNav: vm.$lib.deepCopy(_headerNav), pageLayout: [], footerNav: vm.$lib.deepCopy(_footerNav) });
             }
             vm.$store.dispatch("app/updateSelectedIndex", - 1);
             vm.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
@@ -307,7 +307,7 @@ export default {
         }
     }
 
-    .dig_preCode {
+    .dig-preCode {
         .el-dialog__body {
             display: flex;
             justify-content: center;

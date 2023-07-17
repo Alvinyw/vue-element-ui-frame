@@ -74,22 +74,20 @@ export default {
     },
     mounted() {
         const { footerNav = {} } = this.templateInfo;
-        this.obj = Object.assign({}, this.obj, { ...footerNav })
+        this.obj = this.$lib.deepCopy(footerNav);
     },
     methods: {
         handleClick(idx) {
             this.currentIndex = idx;
         },
         async handleAdd(file, fileList) {
-            // console.log('==========handleAdd===========', file, fileList, this.currentIndex)
             if (file) {
                 const _url = await this.$lib.urlToBase64(file.url);
-                this.obj.property.list[this.currentIndex].icon = [{...file, url: _url}]
+                this.obj.property.list[this.currentIndex].icon = [{ ...file, url: _url }]
             }
         },
         handleRemove(file, fileList) {
             setTimeout(() => {
-                // console.log('==========handleRemove===========', file, fileList, this.currentIndex)
                 this.obj.property.list[this.currentIndex].icon = [];
             }, 10)
         },

@@ -18,7 +18,7 @@
                 </template>
             </el-row>
             <div class="footer-nav" :class="currentComType == componentType.FOOTER_NAV ? 'actived' : ''"
-                @click="onComponentChange({ options: { value: componentType.FOOTER_NAV } }, -1)">
+                @click="onComponentChange({ options: { value: componentType.FOOTER_NAV } }, -2)">
                 <div v-for="(item, index) in footerNav.property.list" :key="index" class="item">
                     <img v-if="item.icon[0]" :src="item.icon[0].url" />
                     <span class="nm">{{ item.text }}</span>
@@ -57,11 +57,6 @@ export default {
             const _c = mapToMdComponents(pageLayout);
             return _c;
         }
-    },
-    watch: {
-    },
-    mounted() {
-
     },
     methods: {
         onComponentChange(item = {}, index = 0) {

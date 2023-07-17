@@ -289,7 +289,7 @@ export default {
             const { value = '', property = {} } = _obj;
             pageLayout.push({
                 value,
-                property: { ...property }
+                property: this.$lib.deepCopy(property)
             });
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout });
             this.$store.dispatch("app/updateSelectedIndex", pageLayout.length - 1);

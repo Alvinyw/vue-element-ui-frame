@@ -6,7 +6,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { mapToRtComponents } from "./utils";
-import HeaderNav from "../components/rt/header-nav.vue";
+import HeaderNav from "../components/rt/header-nav";
 
 export default {
     name: "RightIndex",

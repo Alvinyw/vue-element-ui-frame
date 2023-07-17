@@ -8,14 +8,14 @@ import TextNav from "../components/md/text-nav";
 import Margin from "../components/md/margin";
 
 // 右侧编辑区
-import HeaderNav from "../components/rt/header-nav.vue";
-import FooterNav from "../components/rt/footer-nav.vue";
-import QuickEnter_rt from "../components/rt/quick-enter.vue";
-import PureImg_rt from "../components/rt/pure-img.vue";
-import Img_rt from "../components/rt/img.vue";
-import PureText_rt from "../components/rt/pure-text.vue";
-import TextNav_rt from "../components/rt/text-nav.vue";
-import Margin_rt from "../components/rt/margin.vue";
+import HeaderNav from "../components/rt/header-nav";
+import FooterNav from "../components/rt/footer-nav";
+import QuickEnter_rt from "../components/rt/quick-enter";
+import PureImg_rt from "../components/rt/pure-img";
+import Img_rt from "../components/rt/img";
+import PureText_rt from "../components/rt/pure-text";
+import TextNav_rt from "../components/rt/text-nav";
+import Margin_rt from "../components/rt/margin";
 
 export const mdComponentBaseMap = {
     [componentType.QUICK_ENTER]: QuickEnter,

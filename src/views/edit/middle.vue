@@ -1,9 +1,9 @@
 <template>
     <el-row class="md">
         <el-row class="iphone-view">
-            <div class="head-nav" :class="currentComType == componentType.HEADR_NAV ? 'actived' : ''"
+            <div class="head-nav" :class="currentComType == componentType.HEADER_NAV ? 'actived' : ''"
                 :style="{ 'background-color': headerNav.property.bgColor }"
-                @click="onComponentChange({ options: { value: componentType.HEADR_NAV } }, -1)">
+                @click="onComponentChange({ options: { value: componentType.HEADER_NAV } }, -1)">
                 <img :src="bgHeaderNav" />
                 <h1 :style="{ 'color': headerNav.property.fontColor }">{{ headerNav.property.title }}</h1>
             </div>
@@ -69,7 +69,7 @@ export default {
             const _p = pageLayout.filter((item, index) => item && index !== idx);
             this.$store.dispatch("app/updateTemplateInfo", { ...this.templateInfo, pageLayout: _p });
             this.$store.dispatch("app/updateSelectedIndex", - 1);
-            this.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
+            this.$store.dispatch("app/updateCurrentComType", componentType.HEADER_NAV);
         },
     }
 };

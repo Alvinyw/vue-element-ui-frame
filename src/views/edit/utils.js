@@ -33,7 +33,7 @@ export function mapToMdComponents(list = []) {
 }
 
 export const rtComponentBaseMap = {
-    [componentType.HEADR_NAV]: HeaderNav,
+    [componentType.HEADER_NAV]: HeaderNav,
     [componentType.FOOTER_NAV]: FooterNav,
     [componentType.QUICK_ENTER]: QuickEnter_rt,
     [componentType.PURE_IMG]: PureImg_rt,
@@ -42,6 +42,6 @@ export const rtComponentBaseMap = {
     [componentType.TEXT_NAV]: TextNav_rt,
     [componentType.MARGIN]: Margin_rt,
 }
-export function mapToRtComponents(val = componentType.HEADR_NAV) {
+export function mapToRtComponents(val = componentType.HEADER_NAV) {
     return rtComponentBaseMap[val];
 }

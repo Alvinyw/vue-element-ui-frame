@@ -31,7 +31,7 @@ export default {
     name: "PreviewIndex",
     data() {
         return {
-            headerNav: componentProperty.filter(item => item.value == componentType.HEADR_NAV)[0],
+            headerNav: componentProperty.filter(item => item.value == componentType.HEADER_NAV)[0],
             footerNav: componentProperty.filter(item => item.value == componentType.FOOTER_NAV)[0],
             pageLayout: [],
             bgHeaderNav,

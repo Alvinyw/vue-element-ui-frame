@@ -194,12 +194,12 @@ export default {
                         vm.$store.dispatch("app/updateTemplateInfo", { ..._tmp });
                     });
             } else {
-                const _headerNav = componentProperty.filter(item => componentType.HEADR_NAV == item.value)[0];
+                const _headerNav = componentProperty.filter(item => componentType.HEADER_NAV == item.value)[0];
                 const _footerNav = componentProperty.filter(item => componentType.FOOTER_NAV == item.value)[0];
                 vm.$store.dispatch("app/updateTemplateInfo", { headerNav: vm.$lib.deepCopy(_headerNav), pageLayout: [], footerNav: vm.$lib.deepCopy(_footerNav) });
             }
             vm.$store.dispatch("app/updateSelectedIndex", - 1);
-            vm.$store.dispatch("app/updateCurrentComType", componentType.HEADR_NAV);
+            vm.$store.dispatch("app/updateCurrentComType", componentType.HEADER_NAV);
         })
     },
     mounted() {
@@ -283,7 +283,7 @@ export default {
                     this.dialogTableVisible = false;
                 });
         },
-        onZuJianAdd(val = componentType.HEADR_NAV) {
+        onZuJianAdd(val = componentType.HEADER_NAV) {
             const { pageLayout = [] } = this.templateInfo;
             const _obj = componentProperty.filter(item => item.value == val)[0] || {};
             const { value = '', property = {} } = _obj;

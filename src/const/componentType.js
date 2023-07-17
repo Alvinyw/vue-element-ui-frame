@@ -22,7 +22,7 @@ export const componentType = {
     WANGDIAN: 21, // 网点
 
     // 系统组件
-    HEADR_NAV: 30, // 顶部导航
+    HEADER_NAV: 30, // 顶部导航
     FOOTER_NAV: 31, // 底部导航
 };
 
@@ -196,7 +196,7 @@ export const componentProperty = [
         },
     },
     {
-        value: componentType.HEADR_NAV,
+        value: componentType.HEADER_NAV,
         property: {
             bgColor: "rgba(255, 255, 255, 1)",
             fontColor: "rgba(0, 0, 0, 1)",

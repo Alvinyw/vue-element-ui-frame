@@ -1,7 +1,7 @@
 import { componentType, componentProperty } from "../../const/componentType";
 import { deepCopy } from '../../utils/lib';
 
-const _headerNav = componentProperty.filter(item => componentType.HEADR_NAV == item.value)[0];
+const _headerNav = componentProperty.filter(item => componentType.HEADER_NAV == item.value)[0];
 const _footerNav = componentProperty.filter(item => componentType.FOOTER_NAV == item.value)[0];
 
 export default {

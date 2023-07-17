@@ -1,10 +1,11 @@
 // 中间预览区
 import { componentType } from "@/const/componentType";
-import QuickEnter from "../components/md/quick-enter.vue";
-import PureImg from "../components/md/pure-img.vue";
-import Img from "../components/md/img.vue";
-import PureText from "../components/md/pure-text.vue";
-import TextNav from "../components/md/text-nav.vue";
+import QuickEnter from "../components/md/quick-enter";
+import PureImg from "../components/md/pure-img";
+import Img from "../components/md/img";
+import PureText from "../components/md/pure-text";
+import TextNav from "../components/md/text-nav";
+import Margin from "../components/md/margin";
 
 // 右侧编辑区
 import HeaderNav from "../components/rt/header-nav.vue";
@@ -14,7 +15,6 @@ import PureImg_rt from "../components/rt/pure-img.vue";
 import Img_rt from "../components/rt/img.vue";
 import PureText_rt from "../components/rt/pure-text.vue";
 import TextNav_rt from "../components/rt/text-nav.vue";
-import Margin from "../components/md/margin.vue";
 import Margin_rt from "../components/rt/margin.vue";
 
 export const mdComponentBaseMap = {
@@ -26,12 +26,14 @@ export const mdComponentBaseMap = {
     [componentType.MARGIN]: Margin,
 }
 
+// 中间预览区的组件映射
 export function mapToMdComponents(list = []) {
     return list.map(item => {
         return { options: item, component: mdComponentBaseMap[item.value] };
     });
 }
 
+// 右侧编辑区的组件映射
 export const rtComponentBaseMap = {
     [componentType.HEADER_NAV]: HeaderNav,
     [componentType.FOOTER_NAV]: FooterNav,
